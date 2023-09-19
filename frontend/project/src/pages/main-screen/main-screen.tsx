@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import Layout from "../../components/layout/layout";
-import { AuthorizationStatus } from "../../const";
+import ProductList from '../../components/product-list/product-list';
 
 
 function MainScreen() : JSX.Element {
+  const [activeProductId, setActiveProduct] = useState<number>(-1);
   //const authorizationStatus = useAppSelector(getAuthorizationStatus);
   //const isOffersLoading = useAppSelector(isDataLoading);
 
@@ -70,101 +72,7 @@ function MainScreen() : JSX.Element {
                   <button className="catalog-sort__order-button catalog-sort__order-button--down catalog-sort__order-button--active" aria-label="По убыванию"></button>
                 </div>
               </div>
-              <div className="catalog-cards">
-                <ul className="catalog-cards__list">
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                  <li className="catalog-item">
-                    <div className="catalog-item__data"><img src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="36" height="93" alt="Картинка гитары"/>
-                      <div className="catalog-item__data-wrapper">
-                        <a className="link" href="./product.html"><p className="catalog-item__data-title">ЭлектроГитара Честер bass</p></a>
-                        <br/>
-                        <p className="catalog-item__data-date">Дата добавления 19.09.2022</p>
-                        <p className="catalog-item__data-price">17 500 ₽</p>
-                      </div>
-                    </div>
-                    <div className="catalog-item__buttons"><a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">Редактировать</a>
-                      <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <ProductList/>
             </div>
             <button className="button product-list__button button--red button--big">Добавить новый товар</button>
             <div className="pagination product-list__pagination">
