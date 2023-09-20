@@ -20,3 +20,19 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN'
 }
+
+export enum NameSpace {
+  Data = 'data',
+  Main = 'main',
+  User = 'user',
+}
+
+export enum SortingOption {
+  Price= 'price',
+  Date= 'date',
+}
+
+export enum SortingOrder {
+  Asc = 'asc',
+  Desc = 'desc',
+}

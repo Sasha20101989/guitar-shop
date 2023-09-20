@@ -1,20 +1,22 @@
+import { useGoToProduct } from "../../hooks/use-go-to-product/use-go-to-product";
 import { useGoToUpdateProduct } from "../../hooks/use-go-to-update-product/use-go-to-update-product";
 
-type ProductProps = {
+type ProductCardProps = {
   imageUrl: string;
   title: string;
   dateAdded: string;
-  price: string;
+  price: number;
 };
 
-function Product({ imageUrl, title, dateAdded, price }: ProductProps): JSX.Element {
+function ProductCard({ imageUrl, title, dateAdded, price }: ProductCardProps): JSX.Element {
   const handleGoToUpdateProductClick = useGoToUpdateProduct();
+  const handleGoToProductClick = useGoToProduct();
   return (
     <li className="catalog-item">
       <div className="catalog-item__data">
         <img src={imageUrl} srcSet={`${imageUrl.split('.')[0]}@2x.${imageUrl.split('.')[1]} 2x`} width="36" height="93" alt={`Картинка ${title}`} />
         <div className="catalog-item__data-wrapper">
-          <a className="link" href="./product.html">
+          <a className="link" onClick={handleGoToProductClick}>
             <p className="catalog-item__data-title">{title}</p>
           </a>
           <br />
@@ -34,4 +36,4 @@ function Product({ imageUrl, title, dateAdded, price }: ProductProps): JSX.Eleme
   );
 }
 
-export default Product;
+export default ProductCard;

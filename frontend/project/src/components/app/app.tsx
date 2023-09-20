@@ -7,11 +7,12 @@ import ProductEditorScreen from '../../pages/product-editor-screen/product-edito
 import PrivateRoute from '../private-route/private-route';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import RegisterScreen from '../../pages/register-screen/register-screen';
+import { products } from '../../mocks/products';
 
 function App(): JSX.Element {
   return (
     <Routes>
-      <Route path={AppRoute.Main} element={<MainScreen/>}/>
+      <Route path={AppRoute.Main} element={<MainScreen products={products}/>}/>
       <Route path={AppRoute.Register} element={<RegisterScreen/>}/>
       <Route path={AppRoute.Login} element={<LoginScreen/>}/>
       <Route path={AppRoute.ProductForm} element={<RoomScreen/>}/>

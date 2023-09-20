@@ -10,4 +10,3 @@ export const useGoToUpdateProduct = (): ((event: MouseEvent<HTMLAnchorElement>) 
   };
   return handleGoToUpdateProduct;
 };
-

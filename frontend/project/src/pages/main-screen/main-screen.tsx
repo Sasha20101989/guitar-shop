@@ -6,9 +6,13 @@ import FilterOptions from '../../components/filter-options/filter-options';
 import Pagination from '../../components/pagination/pagination';
 import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 import { useGoToAddNewProduct } from '../../hooks/use-go-to-add-new-product/use-go-to-add-new-product';
+import { Product } from '../../types/product';
 
+type MainScreenProps = {
+  products: Product[];
+}
 
-function MainScreen() : JSX.Element {
+function MainScreen({products}: MainScreenProps) : JSX.Element {
   const handleGoToMainClick = useGoToMain();
   const handleGoToAddNewProductClick = useGoToAddNewProduct();
   const [activeProductId, setActiveProduct] = useState<number>(-1);
@@ -37,7 +41,7 @@ function MainScreen() : JSX.Element {
             <div className="catalog">
               <FilterOptions/>
               <SortingOptions/>
-              <ProductList/>
+              <ProductList products={products}/>
             </div>
             <button className="button product-list__button button--red button--big" onClick={handleGoToAddNewProductClick}>Добавить новый товар</button>
             <Pagination currentPage={2} totalPages={5} onPageChange={(newPage) => handlePageChange(newPage)} />

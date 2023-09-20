@@ -1,16 +1,19 @@
-import Product from "../product/product";
+import { Product } from "../../types/product";
+import { formatDateToDDMMYYYY } from "../../utils/util-date";
+import ProductCard from "../product-card/product-card";
 
-function ProductList():JSX.Element{
+type ProductListProps = {
+  products: Product[];
+}
+
+function ProductList({products}: ProductListProps):JSX.Element{
   return(
     <div className="catalog-cards">
       <ul className="catalog-cards__list">
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
-        <Product imageUrl="img/content/catalog-product-1.png" title="ЭлектроГитара Честер bass" dateAdded="19.09.2022" price="17 500 ₽"/>
+        {products.map((product, id) => {
+          const keyValue = `${id}-${product.title}`;
+          return <ProductCard key={keyValue} imageUrl={product.imageUrl} title={product.title} dateAdded={formatDateToDDMMYYYY(product.createdAt)} price={product.price}/>
+        })}
       </ul>
     </div>
   );
