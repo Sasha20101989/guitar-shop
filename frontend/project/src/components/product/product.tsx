@@ -1,3 +1,5 @@
+import { useGoToUpdateProduct } from "../../hooks/use-go-to-update-product/use-go-to-update-product";
+
 type ProductProps = {
   imageUrl: string;
   title: string;
@@ -6,6 +8,7 @@ type ProductProps = {
 };
 
 function Product({ imageUrl, title, dateAdded, price }: ProductProps): JSX.Element {
+  const handleGoToUpdateProductClick = useGoToUpdateProduct();
   return (
     <li className="catalog-item">
       <div className="catalog-item__data">
@@ -20,7 +23,7 @@ function Product({ imageUrl, title, dateAdded, price }: ProductProps): JSX.Eleme
         </div>
       </div>
       <div className="catalog-item__buttons">
-        <a className="button button--small button--black-border" href="edit-item.html" aria-label="Редактировать товар">
+        <a className="button button--small button--black-border" onClick={handleGoToUpdateProductClick} aria-label="Редактировать товар">
           Редактировать
         </a>
         <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">

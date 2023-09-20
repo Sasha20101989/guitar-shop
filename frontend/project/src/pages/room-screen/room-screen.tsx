@@ -1,17 +1,19 @@
 import Layout from "../../components/layout/layout";
+import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
 
 function RoomScreen(): JSX.Element | null {
+  const handleGoToMainClick = useGoToMain();
   return(
     <Layout>
       <h1 className="page-content__title title title--bigger">Товар</h1>
-          <ul className="breadcrumbs page-content__breadcrumbs">
-            <li className="breadcrumbs__item"><a className="link" href="./main.html">Главная</a>
-            </li>
-            <li className="breadcrumbs__item"><a className="link" href="./main.html">Каталог</a>
-            </li>
-            <li className="breadcrumbs__item"><a className="link">Товар</a>
-            </li>
-          </ul>
+      <ul className="breadcrumbs page-content__breadcrumbs">
+        <li className="breadcrumbs__item"><a className="link" onClick={handleGoToMainClick}>Главная</a>
+        </li>
+        <li className="breadcrumbs__item"><a className="link" onClick={handleGoToMainClick}>Каталог</a>
+        </li>
+        <li className="breadcrumbs__item"><a className="link">Товар</a>
+        </li>
+      </ul>
       <div className="product-container">
         <img className="product-container__img" src="img/content/catalog-product-1.png" srcSet="img/content/catalog-product-1@2x.png 2x" width="90" height="235" alt=""/>
         <div className="product-container__info-wrapper">

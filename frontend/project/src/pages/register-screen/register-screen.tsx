@@ -21,7 +21,7 @@ function RegisterScreen() : JSX.Element {
               <input type="password" placeholder="• • • • • • • • • • • •" id="password" name="password" autoComplete="off" required/>
               <button className="input-login__button-eye" type="button">
                 <svg width="14" height="8" aria-hidden="true">
-                  {/* <use xlink:href="#icon-eye"></use> */}
+                  <use xlinkHref="#icon-eye"></use>
                 </svg>
               </button></span>
             <p className="input-login__error">Заполните поле</p>

@@ -1,17 +1,23 @@
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout/layout";
+import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
 
-function ProductEditorScreen(): JSX.Element | null {
+type ProductEditorScreen = {
+  editMode: boolean;
+}
+
+function ProductEditorScreen({editMode}: ProductEditorScreen): JSX.Element | null {
+  const handleGoToMainClick = useGoToMain();
   const { id } = useParams<{ id?: string }>();
 
-  if (id) {
+  if (editMode) {
     return(
       <Layout>
         <section className="edit-item">
           <div className="container">
             <h1 className="edit-item__title">СURT Z30 Plus</h1>
             <ul className="breadcrumbs">
-              <li className="breadcrumbs__item"><a className="link" href="./main.html">Вход</a>
+              <li className="breadcrumbs__item"><a className="link" onClick={handleGoToMainClick}>Вход</a>
               </li>
               <li className="breadcrumbs__item"><a className="link">Товары</a>
               </li>

@@ -2,9 +2,10 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Register = '/register',
-  Room = '/product/:id',
   ProductForm = '/product-form',
   NotFound = '*',
+  EditProduct = "/product/edit/:id",
+  AddProduct = "/product/add"
 }
 
 export enum APIRoute {

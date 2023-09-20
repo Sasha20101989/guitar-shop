@@ -14,19 +14,20 @@ function App(): JSX.Element {
       <Route path={AppRoute.Main} element={<MainScreen/>}/>
       <Route path={AppRoute.Register} element={<RegisterScreen/>}/>
       <Route path={AppRoute.Login} element={<LoginScreen/>}/>
+      <Route path={AppRoute.ProductForm} element={<RoomScreen/>}/>
       <Route
-        path={AppRoute.Room}
+        path={AppRoute.EditProduct}
         element={
           <PrivateRoute>
-            <RoomScreen/>
+            <ProductEditorScreen editMode={true}/>
           </PrivateRoute>
         }
       />
       <Route
-        path={AppRoute.ProductForm}
+        path={AppRoute.AddProduct}
         element={
           <PrivateRoute>
-            <ProductEditorScreen/>
+            <ProductEditorScreen editMode={false}/>
           </PrivateRoute>
         }
       />

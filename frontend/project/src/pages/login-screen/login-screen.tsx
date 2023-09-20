@@ -1,11 +1,13 @@
 import Layout from "../../components/layout/layout";
+import { useGoToRegister } from "../../hooks/use-go-to-register/use-go-to-register";
 
 function LoginScreen() : JSX.Element {
+  const handleGoToRegisterClick = useGoToRegister();
   return(
     <Layout>
       <section className="login">
         <h1 className="login__title">Войти</h1>
-        <p className="login__text">Hовый пользователь? <a className="login__link" href="registration.html">Зарегистрируйтесь</a> прямо сейчас</p>
+        <p className="login__text">Hовый пользователь? <a className="login__link" onClick={handleGoToRegisterClick} style={{ cursor: 'pointer' }}>Зарегистрируйтесь</a> прямо сейчас</p>
         <form method="post" action="/">
           <div className="input-login">
             <label htmlFor="email">Введите e-mail</label>
@@ -17,7 +19,7 @@ function LoginScreen() : JSX.Element {
               <input type="password" placeholder="• • • • • • • • • • • •" id="passwordLogin" name="password" autoComplete="off" required/>
               <button className="input-login__button-eye" type="button">
                 <svg width="14" height="8" aria-hidden="true">
-                  {/* <use xlink:href="#icon-eye"></use> */}
+                  <use xlinkHref="#icon-eye"></use>
                 </svg>
               </button></span>
             <p className="input-login__error">Заполните поле</p>
