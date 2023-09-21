@@ -15,12 +15,12 @@ function App(): JSX.Element {
       <Route path={AppRoute.Main} element={<MainScreen products={products}/>}/>
       <Route path={AppRoute.Register} element={<RegisterScreen/>}/>
       <Route path={AppRoute.Login} element={<LoginScreen/>}/>
-      <Route path={AppRoute.ProductForm} element={<RoomScreen/>}/>
+      <Route path={AppRoute.ProductForm} element={<RoomScreen products={products}/>}/>
       <Route
         path={AppRoute.EditProduct}
         element={
           <PrivateRoute>
-            <ProductEditorScreen editMode={true}/>
+            <ProductEditorScreen products={products} editMode={true}/>
           </PrivateRoute>
         }
       />
@@ -28,7 +28,7 @@ function App(): JSX.Element {
         path={AppRoute.AddProduct}
         element={
           <PrivateRoute>
-            <ProductEditorScreen editMode={false}/>
+            <ProductEditorScreen products={products} editMode={false}/>
           </PrivateRoute>
         }
       />

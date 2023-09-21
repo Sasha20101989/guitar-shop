@@ -1,6 +1,9 @@
 import { GuitarType } from "../types/guitar-type";
 import { Product } from "../types/product";
 import { StringCount } from "../types/string-count";
+import { IMAGE_URL } from "./const";
+
+const { v4: uuidv4 } = require('uuid');
 
 export function generateRandomGuitars(count: number) {
   const generatedGuitars: Product[] = [];
@@ -23,10 +26,11 @@ export function generateRandomGuitars(count: number) {
     const randomPrice = getRandomInt(100, 1000000);
 
     const guitar = {
-      title: `${randomTitle} ${randomStringCount} струнная ${randomType}`,
+      id: uuidv4(),
+      title: `${randomType} ${randomStringCount} струнная`,
       description: `${randomDescription} ${randomStringCount} струнная гитара`,
       createdAt: new Date(),
-      imageUrl: 'string-path',
+      imageUrl: `${IMAGE_URL}${Math.floor(Math.random() * 9)}.png`,
       type: randomType,
       article: article,
       numberOfStrings: randomStringCount,
