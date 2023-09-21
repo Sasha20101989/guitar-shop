@@ -12,14 +12,23 @@ export function generateRandomGuitars(count: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  function getRandomDate(start: Date, end: Date): Date {
+    const startTime = start.getTime();
+    const endTime = end.getTime();
+    const randomTime = startTime + Math.random() * (endTime - startTime);
+    return new Date(randomTime);
+  }
+
   function generateRandomGuitar(): Product {
-    const titles = ['Гитара', 'Бас-гитара', 'Укулеле', 'Электрогитара'];
+    const startDate = new Date(2023, 1, 1);
+    const endDate = new Date();
+    const randomDate = getRandomDate(startDate, endDate);
+
     const descriptions = ['крутая', 'отличная', 'популярная', 'легкая', 'качественная'];
     const articlePrefix = ['AB', 'CD', 'EF', 'GH'];
     const articleNumbers = getRandomInt(1000, 9999);
     const article = articlePrefix[getRandomInt(0, articlePrefix.length - 1)] + articleNumbers.toString();
 
-    const randomTitle = titles[getRandomInt(0, titles.length - 1)];
     const randomDescription = descriptions[getRandomInt(0, descriptions.length - 1)];
     const randomType = Object.values(GuitarType)[getRandomInt(0, Object.values(GuitarType).length - 1)];
     const randomStringCount: StringCount = Object.values(StringCount)[getRandomInt(0, Object.values(StringCount).length - 1)];
@@ -29,7 +38,7 @@ export function generateRandomGuitars(count: number) {
       id: uuidv4(),
       title: `${randomType} ${randomStringCount} струнная`,
       description: `${randomDescription} ${randomStringCount} струнная гитара`,
-      createdAt: new Date(),
+      createdAt: randomDate,
       imageUrl: `${IMAGE_URL}${Math.floor(Math.random() * 9)}.png`,
       type: randomType,
       article: article,
