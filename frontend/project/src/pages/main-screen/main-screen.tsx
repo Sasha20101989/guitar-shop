@@ -18,8 +18,8 @@ function MainScreen({products}: MainScreenProps) : JSX.Element {
   const handleGoToAddNewProductClick = useGoToAddNewProduct();
   const [activeProductId, setActiveProduct] = useState<string>();
   const [sortOptions, setSortOptions] = useState({
-    sortBy: SortingOption.Price, // Изначально сортируем по дате
-    sortOrder: SortingOrder.Desc, // Изначально по возрастанию
+    sortBy: SortingOption.Price,
+    sortOrder: SortingOrder.Desc,
   });
   //const authorizationStatus = useAppSelector(getAuthorizationStatus);
   //const isOffersLoading = useAppSelector(isDataLoading);
@@ -53,7 +53,7 @@ function MainScreen({products}: MainScreenProps) : JSX.Element {
     return sortedProducts;
   }
 
-  const sortedAndFilteredProducts = applySortingAndFiltering(products, sortOptions);
+  const sortedAndFilteredProducts = applySortingAndFiltering(filteredProducts, sortOptions);
 
   const handlePageChange = (newPage: number) => {
     // код для обработки смены страницы, например, обновление данных на странице или запрос на сервер
