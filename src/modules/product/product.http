@@ -1,0 +1,58 @@
+# Гитары
+## Гитара по идентификатору
+
+GET http://localhost:4000/products/648eee42ce55121b171f3dbb HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODczNTY3ODgsImV4cCI6MTY4NzUyOTU4OH0.XL98vqazdSd7s72JhYwcJq0f5XTWIvjwR8uVrGZdtAY
+
+###
+
+## Добавление новой гитары
+
+POST http://localhost:4000/products/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODczNTY3ODgsImV4cCI6MTY4NzUyOTU4OH0.XL98vqazdSd7s72JhYwcJq0f5XTWIvjwR8uVrGZdtAY
+
+{
+  "title": "Крутая гитара",
+  "description": "Подойдет для выступлений",
+  "image": "catalog-product-0.png",
+  "type": "Укулеле",
+  "article": "QWERTY1234",
+  "numberOfStrings": "7",
+  "price": 503,
+}
+
+###
+
+###
+
+## Обновление существующей гитары
+
+PUT http://localhost:4000/products/648ed4f3a2d4bfc1b3ea2392 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Не очень крутая гитара",
+  "description": "Не подойдет для выступлений",
+  "image": "catalog-product-1.png",
+  "type": "Электрогитара",
+  "article": "1234QWERTY",
+  "numberOfStrings": "12",
+  "price": 5505,
+}
+
+###
+
+## Удаление существующей гитары
+
+DELETE http://localhost:4000/products/648eec37ce55121b171f3d57 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODczNTY3ODgsImV4cCI6MTY4NzUyOTU4OH0.XL98vqazdSd7s72JhYwcJq0f5XTWIvjwR8uVrGZdtAY
+
+###
+
+## Гитары в колличестве указанном в параметре limit
+
+GET http://localhost:4000/products?limit=60 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODcyODMwMDgsImV4cCI6MTY4NzQ1NTgwOH0.7HBupuMnuomXjLAFuOZaMJKzRsqCvwcYosG9DYjt3LY
+
+###

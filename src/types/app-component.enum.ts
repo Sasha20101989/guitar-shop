@@ -1,0 +1,18 @@
+export const AppComponent = {
+  RestApplication: Symbol.for('RestApplication'),
+  LoggerInterface: Symbol.for('LoggerInterface'),
+  ConfigInterface: Symbol.for('ConfigInterface'),
+  DatabaseClientInterface: Symbol.for('DatabaseClientInterface'),
+  UserServiceInterface: Symbol.for('UserServiceInterface'),
+  UserModel: Symbol.for('UserModel'),
+  TypeOfUserServiceInterface: Symbol.for('TypeOfUserServiceInterface'),
+  TypeOfUserModel: Symbol.for('TypeOfUserModel'),
+  ProductServiceInterface: Symbol.for('ProductServiceInterface'),
+  ProductModel: Symbol.for('ProductModel'),
+  HttpErrorExceptionFilter: Symbol.for('HttpErrorExceptionFilter'),
+  UserController: Symbol.for('UserController'),
+  ExceptionFilterInterface: Symbol.for('ExceptionFilterInterface'),
+  ProductController: Symbol.for('ProductController'),
+  BaseExceptionFilter: Symbol.for('BaseExceptionFilter'),
+  ValidationExceptionFilter: Symbol.for('ValidationExceptionFilter'),
+} as const;

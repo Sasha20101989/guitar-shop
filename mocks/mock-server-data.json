@@ -1,0 +1,28 @@
+{
+  "api": {
+    "titles": [
+      "Электрогитара",
+      "Аккустическая гитара",
+      "Укулеле"
+    ],
+    "descriptions": [
+      "Гитара с классическим звуком",
+      "Легендарная рок-гитара",
+      "Универсальная гитара",
+      "Гитара с ярким звуком",
+      "Гитара для выступлений",
+      "Гитара для быстрых соло"
+    ],
+    "images": [
+      "catalog-product-0.png",
+      "catalog-product-1.png",
+      "catalog-product-2.png",
+      "catalog-product-3.png",
+      "catalog-product-4.png",
+      "catalog-product-5.png",
+      "catalog-product-6.png",
+      "catalog-product-7.png",
+      "catalog-product-8.png"
+    ]
+  }
+}
