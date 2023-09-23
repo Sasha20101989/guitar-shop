@@ -1,0 +1,320 @@
+openapi: 3.1.0
+info:
+  title: API для проекта «Guitar Shop»
+  description: «Guitar Shop» — интернет-магазин по продаже гитар. Вы будете разрабатывать часть сайта, доступную роли администратора.
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+tags:
+  - name: products
+    description: Действия с гитарами
+  - name: users
+    description: Действия с пользователями
+
+paths:
+
+  /products:
+    post:
+      tags:
+        - products
+      summary: Создание новой гитары
+      description: Создает новую гитару.
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+      responses:
+        '200':
+          description: Успешное создание обьявления гитары
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'
+        '401':
+          description: Ошибка авторизации
+
+    get:
+      tags:
+        - products
+      summary: Получить список гитар
+      description: Возвращает список гитар.
+      parameters:
+        - name: limit
+          in: query
+          description: Количество предложений для возврата (не более 7)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 7
+        - name: sortByDate
+          in: query
+          description: Сортировка по дате публикации (по возрастанию)
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Список гитар
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product'
+        '401':
+          description: Ошибка авторизации
+
+  /products/{productd}:
+    put:
+      tags:
+        - products
+      summary: Редактирование обьявления гитары
+      description: Редактирует обьявление гитары
+      parameters:
+        - name: productd
+          in: path
+          description: Идентификатор редактируей гитары
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+
+      responses:
+        '200':
+          description: Успешное обновление гитары
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'
+        '401':
+          description: Ошибка авторизации
+
+    get:
+      tags:
+        - products
+      summary: Получение детальной информации по гитаре
+      parameters:
+        - name: productId
+          in: path
+          description: Идентификатор предложения
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Детальная информация по гитаре
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'
+        '404':
+          description: Предложение с указанным идентификатором не найдено.
+
+    delete:
+      tags:
+        - products
+      summary: Удалить гитару
+      description: Удаляет гитару с указанным идентификатором.
+      parameters:
+        - name: productId
+          in: path
+          description: Идентификатор гитары
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Гитара успешно удалена
+        '401':
+          description: Ошибка авторизации
+
+  /products/{productd}/image:
+    post:
+      tags:
+        - products
+      summary: Редактирование изображение гитары
+      description: Редактирует изображение гитары
+
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: Регистрация нового пользователя
+      description: Регистрирует нового пользователя
+
+      requestBody:
+        description: Информация для создания нового пользователя.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newUser'
+      responses:
+        '201':
+          description: Пользователь зарегистрирован. Объект пользователя.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/regularUser'
+        '409':
+          description: Пользователь с таким email уже существует.
+
+  /users/login:
+      post:
+        tags:
+          - users
+        summary: Вход в закрытую часть приложения
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginRequest'
+        responses:
+          '200':
+            description: Успешная аутентификация. Возвращается токен.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/authToken'
+          '400':
+            description: Ошибка запроса. Некорректные данные при аутентификации.
+          '401':
+            description: Ошибка аутентификации. Неверный логин или пароль.
+      get:
+        tags:
+        - users
+        summary: Проверка состояния пользователя
+        responses:
+          '200':
+            description: Клиент авторизован. Возвращает информацию о пользователе.
+            content:
+              application/json:
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/regularUser'
+          '401':
+            description: 'Ошибка аутентификации. Токен не действителен или отсутствует.'
+
+  /users/logout:
+    post:
+      tags:
+        - users
+      summary: Выход из закрытой части приложения
+      responses:
+        '200':
+          description: Успешное завершение сеанса пользователя.
+        '401':
+          description: Ошибка аутентификации. Токен не действителен или отсутствует.
+
+components:
+  schemas:
+
+    newUser:
+      type: object
+
+      properties:
+        email:
+          type: string
+          example: test@test.ru
+          format: email
+        name:
+          type: string
+          example: Александр Петров
+          minLength: 1
+          maxLength: 15
+        password:
+          type: string
+          example: 123456
+          minLength: 6
+          maxLength: 12
+
+    regularUser:
+      type: object
+
+      properties:
+        id:
+            type: string
+            example: fb3y84f738g4f3894v2g72gc27
+            format: uuid
+        email:
+          type: string
+          example: test@test.ru
+          format: email
+        name:
+          type: string
+          example: Александр Петров
+        password:
+          type: string
+          example: 123456
+
+    product:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 10
+          maxLength: 100
+        description:
+          type: string
+          minLength: 20
+          maxLength: 1024
+        createdAt:
+          type: string
+          format: date
+        image:
+          type: string
+          example: https://avatar.org/12
+          format: uri
+          nullable: true
+        type:
+          type: string
+          enum:
+            - Электрогитара
+            - Аккустическая гитара
+            - Укулеле
+        price:
+          type: number
+          minimum: 100
+          maximum: 1000000
+        article:
+          type: string
+          minimum: 5
+          maximum: 40
+        numberOfStrings:
+          type: string
+          enum:
+            - 4
+            - 6
+            - 7
+            - 12
+
+    loginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 6
+          maxLength: 12
+
+    authToken:
+      type: object
+      properties:
+        token:
+          type: string
