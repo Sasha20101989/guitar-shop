@@ -7,7 +7,7 @@ import type { CliCommandInterface } from './cli-command.interface.js';
 import { UserModel } from '../../modules/user/user.entity.js';
 import type { UserServiceInterface } from '../../modules/user/user-service.interface.js';
 import UserService from '../../modules/user/user.service.js';
-import { DEFAULT_USER_PASSWORD } from './import.command.const.js';
+import { DEFAULT_ADMIN_EMAIL, DEFAULT_ADMIN_NAME, DEFAULT_ADMIN_PASSWORD, DEFAULT_USER_PASSWORD } from './import.command.const.js';
 import ConfigService from '../config/config.service.js';
 import { DatabaseClientInterface } from '../database-client/database-client.interface.js';
 import { Command } from '../../types/command.type.js';
@@ -19,6 +19,7 @@ import { createUser } from '../helpers/users.js';
 import ProductService from '../../modules/product/product.service.js';
 import { ProductModel } from '../../modules/product/product.entity.js';
 import { ProductServiceInterface } from '../../modules/product/product-service.interface.js';
+import { DefaultUser } from '../../types/default-user.type.js';
 
 export default class ImportCommand implements CliCommandInterface {
   public readonly name = Command.Import;
@@ -38,6 +39,20 @@ export default class ImportCommand implements CliCommandInterface {
     this.userService = new UserService(this.logger, UserModel);
     this.productService = new ProductService(this.logger, ProductModel);
     this.databaseService = new MongoClientService(this.logger);
+  }
+
+  private async createDefaultUser() {
+    const defaultUser: DefaultUser = {
+      name: DEFAULT_ADMIN_NAME,
+      email: DEFAULT_ADMIN_EMAIL,
+      password: DEFAULT_ADMIN_PASSWORD,
+    };
+
+    const existingDefaulUser = await this.userService.findOrCreate(defaultUser, this.salt);
+
+    if (!existingDefaulUser) {
+      await this.saveUser(defaultUser);;
+    }
   }
 
   private async saveProduct(product: Product) {
@@ -70,6 +85,9 @@ export default class ImportCommand implements CliCommandInterface {
     this.salt = salt;
 
     await this.databaseService.connect(uri);
+
+    await this.createDefaultUser();
+
     const fileReader = new TSVFileReader(filename.trim());
 
     fileReader.on('line', this.onLine);
