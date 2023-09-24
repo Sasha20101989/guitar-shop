@@ -11,6 +11,7 @@ import { useAppSelector } from '../../hooks/index';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 import { AuthorizationStatus } from '../../const';
 import { isDataLoading } from '../../store/main-data/main-data.selectors';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function MainScreen() : JSX.Element {
   const handleGoToMainClick = useGoToMain();
@@ -29,6 +30,7 @@ function MainScreen() : JSX.Element {
     // код для обработки смены страницы, например, обновление данных на странице или запрос на сервер
     console.log(`Выбрана страница ${newPage}`);
   }
+
   if(!isLoading){
     return(
       <Layout>
