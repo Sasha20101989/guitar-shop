@@ -1,5 +1,4 @@
 import { Product } from "../../types/product";
-import { formatDateToDDMMYYYY } from "../../utils/util-date";
 import ProductCard from "../product-card/product-card";
 
 type ProductListProps = {
@@ -13,8 +12,8 @@ function ProductList({products, setActiveProduct}: ProductListProps):JSX.Element
       <ul className="catalog-cards__list">
         {products.map((product, id) => {
           const keyValue = `${id}-${product.title}`;
-          return <ProductCard 
-            key={keyValue} 
+          return <ProductCard
+            key={keyValue}
             product={product}
             onMouseEnter={() => setActiveProduct && setActiveProduct(product.id)}
             onMouseLeave={() => setActiveProduct && setActiveProduct("")}/>

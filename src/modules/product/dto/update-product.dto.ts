@@ -31,8 +31,8 @@ export default class UpdateProductDto {
   @MaxLength(LENGTH_CONSTANTS.MAX_LENGTH_ARTICLE, {message: `Maximum article length must be ${LENGTH_CONSTANTS.MAX_LENGTH_ARTICLE}`})
   public article?: string;
 
-  @IsNotEmpty({ message: 'Article are required' })
-  @IsEnum(GuitarType, { message: 'Invalid strings count' })
+  @IsNotEmpty({ message: 'String Count are required' })
+  @IsEnum(StringCount, { message: 'Invalid strings count' })
   public numberOfStrings?: StringCount;
 
   @IsNotEmpty({ message: 'Image are required' })

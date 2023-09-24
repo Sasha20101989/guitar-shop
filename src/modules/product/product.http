@@ -1,8 +1,8 @@
 # Гитары
 ## Гитара по идентификатору
 
-GET http://localhost:4000/products/648eee42ce55121b171f3dbb HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODczNTY3ODgsImV4cCI6MTY4NzUyOTU4OH0.XL98vqazdSd7s72JhYwcJq0f5XTWIvjwR8uVrGZdtAY
+GET http://localhost:4000/products/65101b0757fb681835aab81c HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NTEwMWJlMzA3YTg3ZjY2MmQxYjFjYjEiLCJpYXQiOjE2OTU1NTQ1NTQsImV4cCI6MTY5NTcyNzM1NH0._7levRPkoncsuwl7Rpl5Gkf3l6C5ZrhHXkbGXUrB9oE
 
 ###
 
@@ -10,16 +10,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0I
 
 POST http://localhost:4000/products/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODczNTY3ODgsImV4cCI6MTY4NzUyOTU4OH0.XL98vqazdSd7s72JhYwcJq0f5XTWIvjwR8uVrGZdtAY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NTEwMWJlMzA3YTg3ZjY2MmQxYjFjYjEiLCJpYXQiOjE2OTU1NTQ1NTQsImV4cCI6MTY5NTcyNzM1NH0._7levRPkoncsuwl7Rpl5Gkf3l6C5ZrhHXkbGXUrB9oE
 
 {
   "title": "Крутая гитара",
   "description": "Подойдет для выступлений",
+  "createdAt": "2022-05-12T11:56:37.573Z",
   "image": "catalog-product-0.png",
   "type": "Укулеле",
   "article": "QWERTY1234",
   "numberOfStrings": "7",
-  "price": 503,
+  "price": 300
 }
 
 ###
@@ -28,45 +29,47 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0I
 
 ## Обновление существующей гитары
 
-PUT http://localhost:4000/products/648ed4f3a2d4bfc1b3ea2392 HTTP/1.1
+PUT http://localhost:4000/products/65101b0b57fb681835aab820 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NTEwMWJlMzA3YTg3ZjY2MmQxYjFjYjEiLCJpYXQiOjE2OTU1NTQ1NTQsImV4cCI6MTY5NTcyNzM1NH0._7levRPkoncsuwl7Rpl5Gkf3l6C5ZrhHXkbGXUrB9oE
 
 {
   "title": "Не очень крутая гитара",
   "description": "Не подойдет для выступлений",
   "image": "catalog-product-1.png",
+  "createdAt": "2022-05-12T11:56:37.573Z",
   "type": "Электрогитара",
   "article": "1234QWERTY",
-  "numberOfStrings": "12",
-  "price": 5505,
+  "numberOfStrings": "7",
+  "price": 5505
 }
 
 ###
 
 ## Удаление существующей гитары
 
-DELETE http://localhost:4000/products/648eec37ce55121b171f3d57 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODczNTY3ODgsImV4cCI6MTY4NzUyOTU4OH0.XL98vqazdSd7s72JhYwcJq0f5XTWIvjwR8uVrGZdtAY
+DELETE http://localhost:4000/products/65101b0757fb681835aab81c HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NTEwMWJlMzA3YTg3ZjY2MmQxYjFjYjEiLCJpYXQiOjE2OTU1NTQ1NTQsImV4cCI6MTY5NTcyNzM1NH0._7levRPkoncsuwl7Rpl5Gkf3l6C5ZrhHXkbGXUrB9oE
 
 ###
 
 ## Гитары в колличестве указанном в параметре limit
 
 GET http://localhost:4000/products?limit=60 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NDhlZDE2NjNjYzFkNDAwZjZhMjU5MGEiLCJpYXQiOjE2ODcyODMwMDgsImV4cCI6MTY4NzQ1NTgwOH0.7HBupuMnuomXjLAFuOZaMJKzRsqCvwcYosG9DYjt3LY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NTEwMWJlMzA3YTg3ZjY2MmQxYjFjYjEiLCJpYXQiOjE2OTU1NTQ1NTQsImV4cCI6MTY5NTcyNzM1NH0._7levRPkoncsuwl7Rpl5Gkf3l6C5ZrhHXkbGXUrB9oE
 
 ###
 
 ## Изменение изображения гитары
 
-POST http://localhost:4000/products/6493030dc35ec98f23925d39/image HTTP/1.1
+POST http://localhost:4000/products/65101b0b57fb681835aab820/image HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0IiwiaWQiOiI2NTEwMWJlMzA3YTg3ZjY2MmQxYjFjYjEiLCJpYXQiOjE2OTU1NTQ1NTQsImV4cCI6MTY5NTcyNzM1NH0._7levRPkoncsuwl7Rpl5Gkf3l6C5ZrhHXkbGXUrB9oE
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="default-guitar.jpg"
-Content-Type: image/jpg
+Content-Disposition: form-data; name="image"; filename="default-guitar.png"
+Content-Type: image/png
 
-< /Users/aleksandr/Documents/GitHub/2033003-six-cities-4/static/default-avatar.jpg
+< /Users/aleksandr/Desktop/default-guitar.png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###

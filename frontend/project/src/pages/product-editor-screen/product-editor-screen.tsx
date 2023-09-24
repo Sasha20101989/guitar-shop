@@ -76,8 +76,8 @@ function ProductEditorScreen({ products, editMode }: ProductEditorScreen): JSX.E
                     <div className="edit-item-image__image-wrap">
                       <img
                         className="edit-item-image__image"
-                        src={selectedProduct.imageUrl}
-                        srcSet={`${selectedProduct.imageUrl.split('.')[0]}@2x.${selectedProduct.imageUrl.split('.')[1]}`}
+                        src={selectedProduct.image}
+                        srcSet={`${selectedProduct.image.split('.')[0]}@2x.${selectedProduct.image.split('.')[1]}`}
                         width="133"
                         height="332"
                         alt={formData.title}

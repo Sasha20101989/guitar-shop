@@ -23,7 +23,7 @@ export class ProductEntity extends defaultClasses.TimeStamps{
   @prop({ trim: true, required: true, minlength: LENGTH_CONSTANTS.MIN_LENGTH_DESCRIPTION, maxlength: LENGTH_CONSTANTS.MAX_LENGTH_DESCRIPTION })
   public description!: string;
 
-  @prop({ required: true, type: String })
+  @prop({ default: '' })
   public image!: string;
 
   @prop({ type: String, enum: GuitarType, required: true })

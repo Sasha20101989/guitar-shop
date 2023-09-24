@@ -10,14 +10,14 @@ type ProductCardProps = {
 };
 
 function ProductCard({ product, onMouseEnter, onMouseLeave }: ProductCardProps): JSX.Element {
-  const {id, imageUrl, createdAt, price, title} = product;
+  const {id, image, createdAt, price, title} = product;
   const handleGoToUpdateProductClick = useGoToUpdateProduct(id);
   const handleGoToProductClick = useGoToProduct(id);
 
   return (
     <li className="catalog-item">
       <div className="catalog-item__data">
-        <img src={imageUrl} srcSet={`${imageUrl.split('.')[0]}@2x.${imageUrl.split('.')[1]}`} width="36" height="93" alt={`Картинка ${title}`} />
+        <img src={image} srcSet={`${image.split('.')[0]}@2x.${image.split('.')[1]}`} width="36" height="93" alt={`Картинка ${title}`} />
         <div className="catalog-item__data-wrapper">
           <a className="link" onClick={handleGoToProductClick}>
             <p className="catalog-item__data-title" onMouseEnter = {onMouseEnter} onMouseLeave = {onMouseLeave}>{title}</p>

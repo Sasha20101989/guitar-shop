@@ -4,6 +4,9 @@ import { StringCount } from '../../../types/string-count.type.js';
 
 export default class ProductRdo {
   @Expose()
+  public id!: string;
+
+  @Expose()
   public title!: string;
 
   @Expose()

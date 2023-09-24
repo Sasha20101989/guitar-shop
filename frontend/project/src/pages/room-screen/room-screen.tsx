@@ -17,7 +17,7 @@ function RoomScreen({products}: RoomScreenProps): JSX.Element | null {
   const [activeTab, setActiveTab] = useState('characteristics');
 
   if(selectedProduct){
-    const { title, imageUrl, article, type, numberOfStrings, description } = selectedProduct;
+    const { title, image, article, type, numberOfStrings, description } = selectedProduct;
 
     const switchToCharacteristics = () => {
       setActiveTab('characteristics');
@@ -39,7 +39,7 @@ function RoomScreen({products}: RoomScreenProps): JSX.Element | null {
           </li>
         </ul>
         <div className="product-container">
-          <img className="product-container__img" src={imageUrl} srcSet={`${imageUrl.split('.')[0]}@2x.${imageUrl.split('.')[1]}`} width="90" height="235" alt={title}/>
+          <img className="product-container__img" src={image} srcSet={`${image.split('.')[0]}@2x.${image.split('.')[1]}`} width="90" height="235" alt={title}/>
           <div className="product-container__info-wrapper">
             <h2 className="product-container__title title title--big title--uppercase">{title}</h2>
             <br/>

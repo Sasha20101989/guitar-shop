@@ -39,7 +39,7 @@ export function generateRandomGuitars(count: number) {
       title: `${randomType} ${randomStringCount} струнная`,
       description: `${randomDescription} ${randomStringCount} струнная гитара`,
       createdAt: randomDate,
-      imageUrl: `${IMAGE_URL}${Math.floor(Math.random() * 9)}.png`,
+      image: `${IMAGE_URL}${Math.floor(Math.random() * 9)}.png`,
       type: randomType,
       article: article,
       numberOfStrings: randomStringCount,

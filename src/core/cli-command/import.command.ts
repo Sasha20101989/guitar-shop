@@ -7,15 +7,13 @@ import type { CliCommandInterface } from './cli-command.interface.js';
 import { UserModel } from '../../modules/user/user.entity.js';
 import type { UserServiceInterface } from '../../modules/user/user-service.interface.js';
 import UserService from '../../modules/user/user.service.js';
-import { DEFAULT_ADMIN_EMAIL, DEFAULT_ADMIN_NAME, DEFAULT_ADMIN_PASSWORD, DEFAULT_USER_PASSWORD } from './import.command.const.js';
+import { DEFAULT_ADMIN_EMAIL, DEFAULT_ADMIN_NAME, DEFAULT_ADMIN_PASSWORD } from './import.command.const.js';
 import ConfigService from '../config/config.service.js';
 import { DatabaseClientInterface } from '../database-client/database-client.interface.js';
 import { Command } from '../../types/command.type.js';
 import MongoClientService from '../database-client/mongo-client.service.js';
 import { Product } from '../../types/product.type.js';
 import { createProduct } from '../helpers/products.js';
-import { User } from '../../types/user.type.js';
-import { createUser } from '../helpers/users.js';
 import ProductService from '../../modules/product/product.service.js';
 import { ProductModel } from '../../modules/product/product.entity.js';
 import { ProductServiceInterface } from '../../modules/product/product-service.interface.js';
@@ -48,29 +46,16 @@ export default class ImportCommand implements CliCommandInterface {
       password: DEFAULT_ADMIN_PASSWORD,
     };
 
-    const existingDefaulUser = await this.userService.findOrCreate(defaultUser, this.salt);
-
-    if (!existingDefaulUser) {
-      await this.saveUser(defaultUser);;
-    }
+    await this.userService.findOrCreate(defaultUser, this.salt);
   }
 
   private async saveProduct(product: Product) {
     await this.productService.create(product);
   }
 
-  private async saveUser(user: User) {
-    await this.userService.findOrCreate({
-      ...user,
-      password: DEFAULT_USER_PASSWORD
-    }, this.salt);
-  }
-
   private async onLine(line: string, resolve: () => void) {
     const product = createProduct(line);
     await this.saveProduct(product);
-    const user = createUser(line);
-    await this.saveUser(user);
     resolve();
   }
 

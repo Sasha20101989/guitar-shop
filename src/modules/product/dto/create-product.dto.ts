@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsInt, IsNotEmpty, Matches, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { IsDateString, IsEnum, IsInt, IsNotEmpty, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { GuitarType } from '../../../types/guitar.type.js';
 import { StringCount } from '../../../types/string-count.type.js';
 import { LENGTH_CONSTANTS } from '../product.const.js';
@@ -18,9 +18,9 @@ export default class CreateProductDto {
   @IsDateString({}, {message: 'Date must be valid ISO date'})
   public createdAt!: Date;
 
-  @IsNotEmpty({ message: 'Image are required' })
-  @Matches(/\.(jpg|png)$/, { message: 'Image must be in JPG or PNG format' })
-  public image!: string;
+  // @IsNotEmpty({ message: 'Image are required' })
+  // @Matches(/\.(jpg|png)$/, { message: 'Image must be in JPG or PNG format' })
+  // public image!: string;
 
   @IsNotEmpty({ message: 'Guitar type are required' })
   @IsEnum(GuitarType, { message: 'Invalid guitar type' })
@@ -31,8 +31,8 @@ export default class CreateProductDto {
   @MaxLength(LENGTH_CONSTANTS.MAX_LENGTH_ARTICLE, {message: `Maximum article length must be ${LENGTH_CONSTANTS.MAX_LENGTH_ARTICLE}`})
   public article!: string;
 
-  @IsNotEmpty({ message: 'Article are required' })
-  @IsEnum(GuitarType, { message: 'Invalid strings count' })
+  @IsNotEmpty({ message: 'String Count are required' })
+  @IsEnum(StringCount, { message: 'Invalid strings count' })
   public numberOfStrings!: StringCount;
 
   @IsNotEmpty({ message: 'Image are required' })

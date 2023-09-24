@@ -6,7 +6,7 @@ export type Product = {
   title: string;
   description: string;
   createdAt: Date;
-  imageUrl: string;
+  image: string;
   type: GuitarType;
   article: string;
   numberOfStrings: StringCount;
