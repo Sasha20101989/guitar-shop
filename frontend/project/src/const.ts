@@ -1,3 +1,7 @@
+import { GuitarType } from "./types/guitar-type";
+import { Product } from "./types/product.js";
+import { StringCount } from "./types/string-count";
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -10,8 +14,8 @@ export enum AppRoute {
 
 export enum APIRoute {
   Products = '/products',
-  Login = '/login',
-  Register = '/register',
+  Login = '/users/login',
+  Register = '/users/register',
   Logout = '/logout'
 }
 
@@ -45,3 +49,51 @@ export enum HTTP_CODE {
   NOT_FOUND = 404,
   CONFLICT = 409,
 }
+
+export const sortProducts = (filteredProducts: Product[], sortBy: SortingOption, sortOrder: SortingOrder) =>{
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    let result = 0;
+
+    if (sortBy === SortingOption.Price) {
+      result = sortOrder === SortingOrder.Asc
+        ? a.price - b.price
+        : b.price - a.price;
+    } else if (sortBy === SortingOption.Date) {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      result = sortOrder === SortingOrder.Asc ? dateA - dateB : dateB - dateA;
+    }
+
+    return result;
+  });
+
+  return sortedProducts;
+};
+
+export const filterProducts = (
+  products: Product[],
+  stringFilters: Record<StringCount, boolean>,
+  typeFilters: Record<GuitarType, boolean>
+): Product[] => {
+  return products.filter((product) => {
+    const stringCountFilter = Object.entries(stringFilters).some(([stringCount, isSelected]) => {
+      if (isSelected && product.numberOfStrings === stringCount) {
+        return true;
+      }
+      return false;
+    });
+
+    const typeFilter = Object.entries(typeFilters).some(([type, isSelected]) => {
+      if (isSelected && product.type === type) {
+        return true;
+      }
+      return false;
+    });
+
+    if (stringCountFilter || typeFilter) {
+      return true;
+    }
+
+    return false;
+  });
+};

@@ -16,6 +16,7 @@ export type RestSchema = {
   HOST: string;
   EXPIRATION_TIME: string;
   STATIC_DIRECTORY_PATH: string;
+  FRONTEND_PORT: number;
 }
 
 export const configRestSchema = convict<RestSchema>({
@@ -23,7 +24,13 @@ export const configRestSchema = convict<RestSchema>({
     doc: 'Port for incoming connections',
     format: 'port',
     env: 'PORT',
-    default: 4000
+    default: null
+  },
+  FRONTEND_PORT: {
+    doc: 'Frontend port',
+    format: 'port',
+    env: 'FRONTEND_PORT',
+    default: null
   },
   SALT: {
     doc: 'Salt for password hash',

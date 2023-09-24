@@ -60,10 +60,11 @@ export abstract class Controller implements ControllerInterface {
 
   protected addStaticPath(data: UnknownRecord): void {
     const fullServerPath = getFullServerPath(this.configService.get('HOST'), this.configService.get('PORT'));
+    const fullFrontendPath = getFullServerPath(this.configService.get('HOST'), this.configService.get('FRONTEND_PORT'));
     transformObject(
       STATIC_RESOURCE_FIELDS,
       `${fullServerPath}/${this.configService.get('STATIC_DIRECTORY_PATH')}`,
-      `${fullServerPath}/${this.configService.get('UPLOAD_DIRECTORY')}`,
+      `${fullFrontendPath}/${this.configService.get('UPLOAD_DIRECTORY')}`,
       data
     );
   }

@@ -19,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZlbGl1Z2luQG1haWwubmV0I
   "image": "catalog-product-0.png",
   "type": "Укулеле",
   "article": "QWERTY1234",
-  "numberOfStrings": "7",
+  "numberOfStrings": "12",
   "price": 300
 }
 

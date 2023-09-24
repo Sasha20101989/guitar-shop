@@ -1,21 +1,31 @@
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout/layout";
 import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
-import { Product } from "../../types/product";
 import RadioButtonGroup from "../../components/radio-button-group/radio-button-group";
 import StringCountRadioGroup from "../../components/string-count-radio-group/string-count-radio-group";
 import { formatDateToDDMMYYYY } from "../../utils/util-date";
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/index";
+import { fetchProductsAction } from "../../store/api-actions/products-api-actions/products-api-actions";
+import { getProducts } from "../../store/main-data/main-data.selectors";
+import { Product } from "../../types/product.js";
 
 type ProductEditorScreen = {
-  products: Product[];
   editMode: boolean;
 }
 
-function ProductEditorScreen({ products, editMode }: ProductEditorScreen): JSX.Element {
+function ProductEditorScreen({ editMode }: ProductEditorScreen): JSX.Element {
   const handleGoToMainClick = useGoToMain();
   const { id } = useParams<{ id?: string }>();
-  const selectedProduct = products.find((product) => product.id === id);
+  const dispatch = useAppDispatch();
+
+  const products = useAppSelector(getProducts);
+
+  useEffect(() => {
+    dispatch(fetchProductsAction());
+  }, [dispatch]);
+
+  const selectedProduct: Product | undefined = products.find((product) => product.id === id);
 
   const isNewProduct = !selectedProduct && !editMode;
 
@@ -48,7 +58,6 @@ function ProductEditorScreen({ products, editMode }: ProductEditorScreen): JSX.E
 
   const handleSaveChanges = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
   };
 
     return (
@@ -105,7 +114,7 @@ function ProductEditorScreen({ products, editMode }: ProductEditorScreen): JSX.E
                     <input
                       type="text"
                       name="date"
-                      value={!isNewProduct && selectedProduct ? formatDateToDDMMYYYY(selectedProduct.createdAt) : ""}
+                      value={!isNewProduct && selectedProduct ? formatDateToDDMMYYYY(new Date(selectedProduct.createdAt).toLocaleString('en-US', { month: 'long', year: 'numeric' })) : ""}
                       placeholder="Дата в формате 00.00.0000"
                       readOnly
                     />

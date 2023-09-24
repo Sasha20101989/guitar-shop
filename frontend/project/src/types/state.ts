@@ -1,5 +1,7 @@
 import {store} from '../store/index.js';
+import { GuitarType } from './guitar-type.js';
 import { Product } from './product.js';
+import { StringCount } from './string-count.js';
 
 export type UserState = {
   authorizationStatus: string;
@@ -11,6 +13,8 @@ export type UserState = {
 export type MainState = {
   sortingOrderMethod: string;
   sortingMethod: string;
+  stringFilters: Record<StringCount, boolean>;
+  typeFilters: Record<GuitarType, boolean>;
 }
 
 export type DataState = {

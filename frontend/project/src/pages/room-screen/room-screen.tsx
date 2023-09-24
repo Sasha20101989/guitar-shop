@@ -3,14 +3,21 @@ import { useParams } from 'react-router-dom';
 import Layout from "../../components/layout/layout";
 import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
 import { Product } from '../../types/product';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { getProducts } from '../../store/main-data/main-data.selectors';
+import { fetchProductsAction } from '../../store/api-actions/products-api-actions/products-api-actions';
 
-type RoomScreenProps = {
-  products: Product[];
-}
-
-function RoomScreen({products}: RoomScreenProps): JSX.Element | null {
+function RoomScreen(): JSX.Element | null {
+  const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
+
+  const products = useAppSelector(getProducts);
+
+  useEffect(() => {
+    dispatch(fetchProductsAction());
+  }, [dispatch]);
+
   const selectedProduct = products.find((product) => product.id === id);
   const handleGoToMainClick = useGoToMain();
 

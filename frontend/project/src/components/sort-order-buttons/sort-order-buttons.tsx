@@ -1,29 +1,33 @@
-import { SortingOption, SortingOrder } from "../../const";
+import { useCallback, useEffect } from "react";
+import { SortingOrder } from "../../const";
+import { useAppDispatch, useAppSelector } from "../../hooks/index";
+import { getSortingOrderMethod } from "../../store/main-process/main-process.selectors";
+import { changeSortingOrder } from "../../store/main-process/main-process.slice";
 
-type SortOrderButtonsProps = {
-  sortOptions: {
-    sortBy: SortingOption;
-    sortOrder: SortingOrder;
-  };
-  handleSortChange: (sortBy: SortingOption, sortOrder: SortingOrder) => void;
-};
+function SortOrderButtons(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function SortOrderButtons({ sortOptions, handleSortChange }: SortOrderButtonsProps): JSX.Element {
+  const selectedOption = useAppSelector(getSortingOrderMethod) as SortingOrder;
+
+  const onOptionSelect = useCallback((option: string) => {
+    dispatch(changeSortingOrder(option));
+  }, [dispatch]);
+
   return (
     <div className="catalog-sort__order">
       <button
         className={`catalog-sort__order-button catalog-sort__order-button--up ${
-          sortOptions.sortOrder === SortingOrder.Asc ? 'catalog-sort__order-button--active' : ''
+          selectedOption === SortingOrder.Asc ? 'catalog-sort__order-button--active' : ''
         }`}
         aria-label="По возрастанию"
-        onClick={() => handleSortChange(sortOptions.sortBy, SortingOrder.Asc)}
+        onClick={() => onOptionSelect(SortingOrder.Asc)}
       ></button>
       <button
         className={`catalog-sort__order-button catalog-sort__order-button--down ${
-          sortOptions.sortOrder === SortingOrder.Desc ? 'catalog-sort__order-button--active' : ''
+          selectedOption === SortingOrder.Desc ? 'catalog-sort__order-button--active' : ''
         }`}
         aria-label="По убыванию"
-        onClick={() => handleSortChange(sortOptions.sortBy, SortingOrder.Desc)}
+        onClick={() => onOptionSelect(SortingOrder.Desc)}
       ></button>
     </div>
   );

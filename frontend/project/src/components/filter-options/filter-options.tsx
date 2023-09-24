@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { StringCount } from "../../types/string-count";
 import { Product } from "../../types/product";
 import { GuitarType } from "../../types/guitar-type";
-
-type FilterOptionsProps = {
-  products: Product[];
-  onFilterChange: (filteredProducts: Product[]) => void;
-}
+import { useAppDispatch, useAppSelector } from "../../hooks/index";
+import { getStringFilters, getTypeFilters } from "../../store/main-process/main-process.selectors";
+import { resetStringFilters, resetTypeFilters, toggleStringFilter, toggleTypeFilter } from "../../store/main-process/main-process.slice";
+import { StringCount } from "../../types/string-count";
 
 const guitarTypeLabels: Record<GuitarType, string> = {
   [GuitarType.Electric]: 'Электрогитары',
@@ -14,79 +12,31 @@ const guitarTypeLabels: Record<GuitarType, string> = {
   [GuitarType.Ukulele]: 'Укулеле',
 };
 
-function FilterOptions({ products, onFilterChange }: FilterOptionsProps): JSX.Element {
-  const initialStringFilters: Record<StringCount, boolean> ={
-    [StringCount.Four]: false,
-    [StringCount.Six]: false,
-    [StringCount.Seven]: false,
-    [StringCount.Twelve]: false,
-  };
-
-  const initialTypeFilters: Record<GuitarType, boolean> = {
-    [GuitarType.Electric]: false,
-    [GuitarType.Acoustic]: false,
-    [GuitarType.Ukulele]: false,
-  };
-
-  const [stringFilters, setStringFilters] = useState(initialStringFilters);
-  const [typeFilters, setTypeFilters] = useState(initialTypeFilters);
+function FilterOptions(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const initialStringFilters = useAppSelector(getStringFilters);
+  const initialTypeFilters = useAppSelector(getTypeFilters);
 
   const handleClearFilters = () => {
-    setStringFilters(initialStringFilters);
-    setTypeFilters(initialTypeFilters);
-    onFilterChange(products);
+    dispatch(resetStringFilters());
+    dispatch(resetTypeFilters());
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-    if (name in stringFilters) {
-      setStringFilters({ ...stringFilters, [name]: checked });
-    } else if (name in typeFilters) {
-      setTypeFilters({ ...typeFilters, [name]: checked });
+    if (name in initialStringFilters) {
+      dispatch(toggleStringFilter(name as StringCount));
+    } else if (name in initialTypeFilters) {
+      dispatch(toggleTypeFilter(name as GuitarType));
     }
   };
-
-  const handleFilterChange = () => {
-    const filteredProducts = products.filter((product) => {
-      const stringCountFilter = Object.entries(stringFilters).some(([stringCount, isSelected]) => {
-        if (isSelected && product.numberOfStrings === stringCount) {
-          return true;
-        }
-        return false;
-      });
-
-      const typeFilter = Object.entries(typeFilters).some(([type, isSelected]) => {
-        if (isSelected && product.type === type) {
-          return true;
-        }
-        return false;
-      });
-
-      if (stringCountFilter || typeFilter) {
-        return true;
-      }
-
-      return false;
-    });
-
-    if (Object.values(stringFilters).some((isSelected) => isSelected) || 
-      Object.values(typeFilters).some((isSelected) => isSelected)) {
-      onFilterChange(filteredProducts);
-    } else {
-      onFilterChange(products);
-    }
-  };
-
-  useEffect(() => {
-    handleFilterChange();
-  }, [stringFilters, typeFilters]);
 
   return (
     <form className="catalog-filter" action="#" method="post">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
       <fieldset className="catalog-filter__block">
-        <legend className="catalog-filter__block-title">Количество струн</legend>
-        {Object.entries(typeFilters).map(([type, isSelected]) => (
+        <legend className="catalog-filter__block-title">Тип гитар</legend>
+        {Object.entries(initialTypeFilters).map(([type, isSelected]) => (
           <div key={type} className="form-checkbox catalog-filter__block-item">
             <input
               className="visually-hidden"
@@ -102,7 +52,7 @@ function FilterOptions({ products, onFilterChange }: FilterOptionsProps): JSX.El
       </fieldset>
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Количество струн</legend>
-        {Object.entries(stringFilters).map(([stringCount, isSelected]) => (
+        {Object.entries(initialStringFilters).map(([stringCount, isSelected]) => (
           <div key={stringCount} className="form-checkbox catalog-filter__block-item">
             <input
               className="visually-hidden"
