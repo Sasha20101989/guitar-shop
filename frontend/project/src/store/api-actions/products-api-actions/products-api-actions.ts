@@ -11,10 +11,11 @@ export const fetchProductAction = createAsyncThunk<Product | null, string, {
 }>(
   'data/fetchProduct',
   async (productId: string, {dispatch, extra: api}) => {
-    const {data} = await api.get<Product>(`${APIRoute.Products}/${productId}`);
+    const {data} = await api.put<Product>(`${APIRoute.Products}/${productId}`);
     return data;
   },
 );
+
 
 export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
   dispatch: AppDispatch;

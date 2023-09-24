@@ -9,7 +9,7 @@ import { store } from './store';
 import { checkAuthAction } from './store/api-actions/auth-api-actions/auth-api-actions';
 import { fetchProductsAction } from './store/api-actions/products-api-actions/products-api-actions';
 
-//store.dispatch(checkAuthAction());
+store.dispatch(checkAuthAction());
 store.dispatch(fetchProductsAction());
 
 const root = ReactDOM.createRoot(

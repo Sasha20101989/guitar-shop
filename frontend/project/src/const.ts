@@ -8,9 +8,10 @@ export enum AppRoute {
   Register = '/register',
   ProductForm = '/product/:id',
   NotFound = '*',
-  EditProduct = "/product/edit/:id",
+  EditProduct = "/products/edit/:id",
   AddProduct = "/product/add"
 }
+
 
 export enum APIRoute {
   Products = '/products',
@@ -97,3 +98,5 @@ export const filterProducts = (
     return false;
   });
 };
+
+export const RING_LOADER_COLOR = '#123abc';

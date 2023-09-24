@@ -6,7 +6,7 @@ export const useGoToUpdateProduct = (id: string): ((event: MouseEvent<HTMLAnchor
   const navigate = useNavigate();
   const handleGoToUpdateProduct = (evt: MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
-    navigate(`/product/edit/${id}`);
+    navigate(`/products/edit/${id}`);
   };
   return handleGoToUpdateProduct;
 };

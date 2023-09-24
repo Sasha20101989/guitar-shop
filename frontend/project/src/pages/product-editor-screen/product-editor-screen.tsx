@@ -6,7 +6,7 @@ import StringCountRadioGroup from "../../components/string-count-radio-group/str
 import { formatDateToDDMMYYYY } from "../../utils/util-date";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
-import { fetchProductsAction } from "../../store/api-actions/products-api-actions/products-api-actions";
+import { fetchProductAction, fetchProductsAction } from "../../store/api-actions/products-api-actions/products-api-actions";
 import { getProduct, getProducts } from "../../store/main-data/main-data.selectors";
 import { Product } from "../../types/product";
 
@@ -24,8 +24,11 @@ function ProductEditorScreen({ editMode }: ProductEditorScreen): JSX.Element {
   const product = useAppSelector(getProduct);
 
   useEffect(() => {
-    dispatch(fetchProductsAction());
-  }, [dispatch]);
+    if (id) {
+      dispatch(fetchProductAction(id));
+
+    }
+  }, [dispatch, id,]);
 
   const selectedProduct: Product | undefined = products.find((product) => product.id === id);
 

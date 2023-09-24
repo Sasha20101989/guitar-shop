@@ -6,19 +6,21 @@ import FilterOptions from '../../components/filter-options/filter-options';
 import Pagination from '../../components/pagination/pagination';
 import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 import { useGoToAddNewProduct } from '../../hooks/use-go-to-add-new-product/use-go-to-add-new-product';
-import { Product } from '../../types/product';
-import useProducts from '../../hooks/use-products/use-products';
 import useFilteredAndSortedProducts from '../../hooks/use-filtered-and-sorted-offers/use-filtered-and-sorted-offers';
+import { useAppSelector } from '../../hooks/index';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { AuthorizationStatus } from '../../const';
+import { isDataLoading } from '../../store/main-data/main-data.selectors';
 
 function MainScreen() : JSX.Element {
   const handleGoToMainClick = useGoToMain();
   const handleGoToAddNewProductClick = useGoToAddNewProduct();
   const [activeProductId, setActiveProduct] = useState<string>();
 
-  //const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  //const isOffersLoading = useAppSelector(isDataLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersLoading = useAppSelector(isDataLoading);
 
-  //const isLoading = authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading;
+  const isLoading = authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading;
   //if(!isLoading){
 
   const sortedAndFilteredProducts = useFilteredAndSortedProducts();
@@ -27,7 +29,7 @@ function MainScreen() : JSX.Element {
     // код для обработки смены страницы, например, обновление данных на странице или запрос на сервер
     console.log(`Выбрана страница ${newPage}`);
   }
-
+  if(!isLoading){
     return(
       <Layout>
         <section className="product-list">
@@ -50,8 +52,8 @@ function MainScreen() : JSX.Element {
         </section>
       </Layout>
     );
-  //}
-  //return (<LoadingScreen/>);
+  }
+  return (<LoadingScreen/>);
 }
 
 export default MainScreen;
