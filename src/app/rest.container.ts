@@ -4,8 +4,10 @@ import { AppComponent } from '../types/app-component.enum.js';
 import { RestSchema } from '../core/config/rest.schema.js';
 import type { ConfigInterface } from '../core/config/config.interface.js';
 import ConfigService from '../core/config/config.service.js';
-import type { ExceptionFilterInterface } from '../core/expception-filters/exception-filter.interface.js';
-import ExceptionFilter from '../core/expception-filters/exception-filter.js';
+import { ExceptionFilterInterface } from '../core/expception-filters/exception-filter.interface.js';
+import HttpErrorExceptionFilter from '../core/expception-filters/http-error.exception-filter.js';
+import ValidationExceptionFilter from '../core/expception-filters/validation.exception-filter.js';
+import BaseExceptionFilter from '../core/expception-filters/base.exception-filter.js';
 import type { LoggerInterface } from '../core/logger/logger.interface.js';
 import PinoService from '../core/logger/pino.service.js';
 import RestApplication from './rest.js';
@@ -19,7 +21,9 @@ export function createRestApplicationContainer() {
   restApplicationContainer.bind<LoggerInterface>(AppComponent.LoggerInterface).to(PinoService).inSingletonScope();
   restApplicationContainer.bind<ConfigInterface<RestSchema>>(AppComponent.ConfigInterface).to(ConfigService).inSingletonScope();
   restApplicationContainer.bind<DatabaseClientInterface>(AppComponent.DatabaseClientInterface).to(MongoClientService).inSingletonScope();
-  restApplicationContainer.bind<ExceptionFilterInterface>(AppComponent.ExceptionFilterInterface).to(ExceptionFilter).inSingletonScope();
+  restApplicationContainer.bind<ExceptionFilterInterface>(AppComponent.HttpErrorExceptionFilter).to(HttpErrorExceptionFilter).inSingletonScope();
+  restApplicationContainer.bind<ExceptionFilterInterface>(AppComponent.ValidationExceptionFilter).to(ValidationExceptionFilter).inSingletonScope();
+  restApplicationContainer.bind<ExceptionFilterInterface>(AppComponent.BaseExceptionFilter).to(BaseExceptionFilter).inSingletonScope();
 
   return restApplicationContainer;
 }
