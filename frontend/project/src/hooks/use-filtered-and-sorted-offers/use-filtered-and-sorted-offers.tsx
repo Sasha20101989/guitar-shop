@@ -31,8 +31,7 @@ function useFilteredAndSortedProducts() {
   };
 
   if (!areFiltersSelected()) {
-    // Если ни один фильтр не выбран, вернуть все продукты без фильтрации.
-    return allProducts;
+    return sortProducts(allProducts, sortBy, sortOrder);
   }
 
   const filteredProducts = allProducts.filter((product) => {

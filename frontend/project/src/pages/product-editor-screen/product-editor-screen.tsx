@@ -7,8 +7,8 @@ import { formatDateToDDMMYYYY } from "../../utils/util-date";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { fetchProductsAction } from "../../store/api-actions/products-api-actions/products-api-actions";
-import { getProducts } from "../../store/main-data/main-data.selectors";
-import { Product } from "../../types/product.js";
+import { getProduct, getProducts } from "../../store/main-data/main-data.selectors";
+import { Product } from "../../types/product";
 
 type ProductEditorScreen = {
   editMode: boolean;
@@ -20,6 +20,8 @@ function ProductEditorScreen({ editMode }: ProductEditorScreen): JSX.Element {
   const dispatch = useAppDispatch();
 
   const products = useAppSelector(getProducts);
+
+  const product = useAppSelector(getProduct);
 
   useEffect(() => {
     dispatch(fetchProductsAction());
@@ -114,7 +116,7 @@ function ProductEditorScreen({ editMode }: ProductEditorScreen): JSX.Element {
                     <input
                       type="text"
                       name="date"
-                      value={!isNewProduct && selectedProduct ? formatDateToDDMMYYYY(new Date(selectedProduct.createdAt).toLocaleString('en-US', { month: 'long', year: 'numeric' })) : ""}
+                      value={!isNewProduct && selectedProduct ? formatDateToDDMMYYYY(new Date(selectedProduct.createdAt).toISOString()) : ""}
                       placeholder="Дата в формате 00.00.0000"
                       readOnly
                     />

@@ -23,7 +23,7 @@ function FilterOptions(): JSX.Element {
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
+    const { name } = event.target;
     if (name in initialStringFilters) {
       dispatch(toggleStringFilter(name as StringCount));
     } else if (name in initialTypeFilters) {

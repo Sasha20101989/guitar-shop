@@ -7,7 +7,6 @@ import ProductEditorScreen from '../../pages/product-editor-screen/product-edito
 import PrivateRoute from '../private-route/private-route';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import RegisterScreen from '../../pages/register-screen/register-screen';
-import { products } from '../../mocks/products';
 
 function App(): JSX.Element {
   return (

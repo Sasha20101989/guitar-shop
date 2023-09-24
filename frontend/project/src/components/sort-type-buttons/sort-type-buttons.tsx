@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { SortingOption } from "../../const";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { getSortingMethod } from "../../store/main-process/main-process.selectors";

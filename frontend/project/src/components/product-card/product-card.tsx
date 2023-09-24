@@ -23,7 +23,7 @@ function ProductCard({ product, onMouseEnter, onMouseLeave }: ProductCardProps):
             <p className="catalog-item__data-title" onMouseEnter = {onMouseEnter} onMouseLeave = {onMouseLeave}>{type} {title}</p>
           </a>
           <br />
-          <p className="catalog-item__data-date">Дата добавления {formatDateToDDMMYYYY(new Date(createdAt).toLocaleString('en-US', { month: 'long', year: 'numeric' }))} </p>
+          <p className="catalog-item__data-date">Дата добавления {formatDateToDDMMYYYY(new Date(createdAt).toISOString())} </p>
           <p className="catalog-item__data-price">{price} ₽</p>
         </div>
       </div>
