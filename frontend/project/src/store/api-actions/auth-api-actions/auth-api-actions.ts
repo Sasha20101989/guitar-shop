@@ -6,14 +6,18 @@ import { APIRoute } from '../../../const';
 import { AuthData } from '../../../types/auth-data';
 import { dropToken, saveToken } from '../../../services/token';
 
-export const checkAuthAction = createAsyncThunk<UserData, undefined, {
+class UserDto {
+  public email!: string;
+}
+
+export const checkAuthAction = createAsyncThunk<UserDto, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
-    const response = await api.get<UserData>(APIRoute.Login);
+    const response = await api.get<UserDto>(APIRoute.Login);
     return response.data;
   },
 );

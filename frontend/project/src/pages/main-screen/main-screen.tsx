@@ -22,7 +22,6 @@ function MainScreen() : JSX.Element {
   const isOffersLoading = useAppSelector(isDataLoading);
 
   const isLoading = authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading;
-  //if(!isLoading){
 
   const sortedAndFilteredProducts = useFilteredAndSortedProducts();
 

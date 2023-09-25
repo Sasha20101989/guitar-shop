@@ -5,8 +5,6 @@ import { StringCount } from './string-count.js';
 
 export type UserState = {
   authorizationStatus: string;
-  email: string | undefined;
-  userId: number | null;
   isSubmitting: boolean;
 }
 

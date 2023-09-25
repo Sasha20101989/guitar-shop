@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import RoomScreen from '../../pages/room-screen/room-screen';
@@ -7,8 +7,11 @@ import ProductEditorScreen from '../../pages/product-editor-screen/product-edito
 import PrivateRoute from '../private-route/private-route';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import RegisterScreen from '../../pages/register-screen/register-screen';
+import { useAppSelector } from '../../hooks/index';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus) as AuthorizationStatus;
   return (
     <Routes>
       <Route path={AppRoute.Main} element={<MainScreen/>}/>
@@ -18,7 +21,7 @@ function App(): JSX.Element {
       <Route
         path={AppRoute.EditProduct}
         element={
-          <PrivateRoute>
+          <PrivateRoute authorizationStatus={authorizationStatus}>
             <ProductEditorScreen editMode={true}/>
           </PrivateRoute>
         }
@@ -26,7 +29,7 @@ function App(): JSX.Element {
       <Route
         path={AppRoute.AddProduct}
         element={
-          <PrivateRoute>
+          <PrivateRoute authorizationStatus={authorizationStatus}>
             <ProductEditorScreen editMode={false}/>
           </PrivateRoute>
         }

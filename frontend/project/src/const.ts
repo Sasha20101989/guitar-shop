@@ -100,3 +100,15 @@ export const filterProducts = (
 };
 
 export const RING_LOADER_COLOR = '#123abc';
+
+export const isValidPassword = (password: string): boolean => {
+  const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
+  return regex.test(password);
+};
+
+export const isAuthorization = (status: AuthorizationStatus) =>
+  status === AuthorizationStatus.Auth;
+
+export const isAuthorizationUnknown = (status: AuthorizationStatus) =>
+  status === AuthorizationStatus.Unknown;
+

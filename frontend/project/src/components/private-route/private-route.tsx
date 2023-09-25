@@ -1,20 +1,24 @@
-import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
-//import { useIsLoggedIn } from '../../hooks/use-is-logged-in/use-is-logged-in';
+import {Navigate} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus, isAuthorization, isAuthorizationUnknown} from '../../const';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 type PrivateRouteProps = {
+  authorizationStatus: AuthorizationStatus;
   children: JSX.Element;
 }
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
-  const {children} = props;
+  const {authorizationStatus, children} = props;
 
-  return (
-    //useIsLoggedIn(AuthorizationStatus.Auth)
-    true
-      ? children
-      : <Navigate to={AppRoute.Login} />
-  );
+  if (isAuthorization(authorizationStatus)) {
+    return children;
+  }
+
+  if (isAuthorizationUnknown(authorizationStatus)) {
+    return <LoadingScreen />;
+  }
+
+  return <Navigate to={AppRoute.Login} />;
 }
 
 export default PrivateRoute;
