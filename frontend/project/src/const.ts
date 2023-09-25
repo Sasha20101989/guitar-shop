@@ -2,6 +2,7 @@ import { GuitarType } from "./types/guitar-type";
 import { Product } from "./types/product.js";
 import { StringCount } from "./types/string-count";
 
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -9,7 +10,8 @@ export enum AppRoute {
   ProductForm = '/product/:id',
   NotFound = '*',
   EditProduct = "/products/edit/:id",
-  AddProduct = "/product/add"
+  AddProduct = "/product/add",
+  Logout = "/logout"
 }
 
 
@@ -17,7 +19,7 @@ export enum APIRoute {
   Products = '/products',
   Login = '/users/login',
   Register = '/users/register',
-  Logout = '/logout'
+  Logout = '/users/logout'
 }
 
 export enum AuthorizationStatus {

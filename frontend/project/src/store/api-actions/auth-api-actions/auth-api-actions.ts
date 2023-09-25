@@ -53,7 +53,7 @@ export const registerAction = createAsyncThunk<CreateUserDto, RegisterData, {
   'user/register',
   async ({login: email, password, name}, {dispatch, extra: api}) => {
     const {data} = await api.post<CreateUserDto>(APIRoute.Register, {email, password, name});
-    //dispatch(checkAuthAction());
+    dispatch(checkAuthAction());
     return data;
   },
 );
@@ -65,7 +65,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 }>(
   'user/logout',
   async (_arg, {dispatch, extra: api}) => {
-    await api.delete(APIRoute.Logout);
+    await api.post(APIRoute.Logout);
     dropToken();
   },
 );

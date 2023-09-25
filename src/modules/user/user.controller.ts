@@ -34,12 +34,13 @@ export default class UserController extends Controller {
 
     this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.create, middlewares: [new ValidateDtoMiddleware(CreateUserDto)] });
     this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login, middlewares: [new ValidateDtoMiddleware(LoginUserDto)] });
+    this.addRoute({ path: '/logout', method: HttpMethod.Post, handler: this.logout });
     this.addRoute({ path: '/email', method: HttpMethod.Get, handler: this.findByEmail, middlewares: [new UserExistsByEmailMiddleware(this.userService)] });
 
     this.addRoute({
       path: '/login',
       method: HttpMethod.Get,
-      handler: this.checkAuthenticate,
+      handler: this.checkAuthenticate
     });
   }
 
@@ -75,6 +76,15 @@ export default class UserController extends Controller {
     const user = await this.userService.findByEmail(email);
 
     this.ok(res, fillDTO(UserRdo, user));
+  }
+
+  public async logout(_req: Request, res: Response): Promise<void> {
+    try{
+      this.ok(res, { message: 'Logout successful' });
+    }catch(e){
+      console.log('e', e);
+    }
+
   }
 
   public async login(
