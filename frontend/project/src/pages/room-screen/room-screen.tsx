@@ -5,8 +5,9 @@ import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
 import { Product } from '../../types/product';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getProducts } from '../../store/main-data/main-data.selectors';
-import { fetchProductsAction } from '../../store/api-actions/products-api-actions/products-api-actions';
+import { getProduct, getProducts } from '../../store/main-data/main-data.selectors';
+import { fetchProductAction, fetchProductsAction } from '../../store/api-actions/products-api-actions/products-api-actions';
+import { loadProduct } from '../../store/main-data/main-data.slice.js';
 
 function RoomScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
@@ -15,8 +16,10 @@ function RoomScreen(): JSX.Element | null {
   const products = useAppSelector(getProducts);
 
   useEffect(() => {
-    dispatch(fetchProductsAction());
-  }, [dispatch]);
+    if(id){
+      dispatch(fetchProductAction(id));
+    }
+  }, [dispatch, id]);
 
   const selectedProduct = products.find((product) => product.id === id);
   const handleGoToMainClick = useGoToMain();

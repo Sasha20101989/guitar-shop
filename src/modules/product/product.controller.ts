@@ -121,6 +121,7 @@ export default class ProductController extends Controller {
     this.ok(res, fillDTO(ProductRdo, deletedProduct));
   }
 
+
   public async update(
     {params, body}: Request<core.ParamsDictionary | ParamsGetProduct, UnknownRecord, UpdateProductDto>,
     res: Response

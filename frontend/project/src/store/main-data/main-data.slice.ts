@@ -1,7 +1,7 @@
 import { Product } from './../../types/product';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DataState } from '../../types/state';
-import { fetchProductAction, fetchProductsAction } from '../api-actions/products-api-actions/products-api-actions';
+import { fetchProductAction, fetchProductsAction, removeProductAction } from '../api-actions/products-api-actions/products-api-actions';
 
 export const initialState: DataState = {
   products: [],
@@ -42,9 +42,24 @@ export const mainData = createSlice({
       })
       .addCase(fetchProductAction.fulfilled, (state, action) => {
         state.selectedProduct = action.payload;
+        state.isDataLoading = false;
       })
       .addCase(fetchProductAction.rejected, (state, action) => {
         state.selectedProduct= null;
+        state.isDataLoading = false;
+      })
+      .addCase(fetchProductAction.pending, (state) => {
+        state.isDataLoading = true;
+      })
+      .addCase(removeProductAction.fulfilled, (state, action) => {
+        state.selectedProduct= null;
+        state.isDataLoading = false;
+      })
+      .addCase(removeProductAction.rejected, (state, action) => {
+        state.isDataLoading = false;
+      })
+      .addCase(removeProductAction.pending, (state) => {
+        state.isDataLoading = true;
       })
   },
 });

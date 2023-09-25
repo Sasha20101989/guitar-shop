@@ -7,21 +7,19 @@ import Pagination from '../../components/pagination/pagination';
 import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 import { useGoToAddNewProduct } from '../../hooks/use-go-to-add-new-product/use-go-to-add-new-product';
 import useFilteredAndSortedProducts from '../../hooks/use-filtered-and-sorted-offers/use-filtered-and-sorted-offers';
-import { useAppSelector } from '../../hooks/index';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 import { AuthorizationStatus } from '../../const';
 import { isDataLoading } from '../../store/main-data/main-data.selectors';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { fetchProductAction } from '../../store/api-actions/products-api-actions/products-api-actions';
 
 function MainScreen() : JSX.Element {
+  const dispatch = useAppDispatch();
   const handleGoToMainClick = useGoToMain();
   const handleGoToAddNewProductClick = useGoToAddNewProduct();
-  const [activeProductId, setActiveProduct] = useState<string>();
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersLoading = useAppSelector(isDataLoading);
-
-  const isLoading = authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading;
 
   const sortedAndFilteredProducts = useFilteredAndSortedProducts();
 
@@ -30,7 +28,7 @@ function MainScreen() : JSX.Element {
     console.log(`Выбрана страница ${newPage}`);
   }
 
-  if(!isLoading){
+  if(!isOffersLoading){
     return(
       <Layout>
         <section className="product-list">
@@ -45,7 +43,7 @@ function MainScreen() : JSX.Element {
             <div className="catalog">
               <FilterOptions/>
               <SortingOptions/>
-              <ProductList products={sortedAndFilteredProducts} setActiveProduct={setActiveProduct} />
+              <ProductList products={sortedAndFilteredProducts} />
             </div>
             <button className="button product-list__button button--red button--big" onClick={handleGoToAddNewProductClick}>Добавить новый товар</button>
             <Pagination currentPage={2} totalPages={5} onPageChange={(newPage) => handlePageChange(newPage)} />

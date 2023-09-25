@@ -21,13 +21,6 @@ function useRegisterForm(){
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const isLoggedIn = useIsLoggedIn(AuthorizationStatus.Auth);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate(AppRoute.Main);
-    }
-  }, [isLoggedIn, navigate]);
 
   const onSubmit = (authData: RegisterData) => {
     if (!isValidPassword(authData.password)) {
@@ -35,6 +28,7 @@ function useRegisterForm(){
       return;
     }
     dispatch(registerAction(authData));
+    navigate(AppRoute.Login)
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -54,7 +48,6 @@ function useRegisterForm(){
     nameRef,
     emailRef,
     passwordRef,
-    isLoggedIn,
     handleSubmit,
     handleGoMainClick
   };

@@ -3,10 +3,9 @@ import ProductCard from "../product-card/product-card";
 
 type ProductListProps = {
   products: Product[];
-  setActiveProduct?: (id: string) => void;
 }
 
-function ProductList({products, setActiveProduct}: ProductListProps):JSX.Element{
+function ProductList({products}: ProductListProps):JSX.Element{
   return(
     <div className="catalog-cards">
       <ul className="catalog-cards__list">
@@ -14,9 +13,7 @@ function ProductList({products, setActiveProduct}: ProductListProps):JSX.Element
           const keyValue = `${id}-${product.title}`;
           return <ProductCard
             key={keyValue}
-            product={product}
-            onMouseEnter={() => setActiveProduct && setActiveProduct(product.id)}
-            onMouseLeave={() => setActiveProduct && setActiveProduct("")}/>
+            product={product}/>
         })}
       </ul>
     </div>

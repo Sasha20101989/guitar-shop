@@ -17,12 +17,6 @@ function Header(): JSX.Element {
 
   const isLoggedIn = useIsLoggedIn(AuthorizationStatus.Auth);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate(AppRoute.Login);
-    }
-  }, [isLoggedIn, navigate]);
-
   const handleLogout = (evt: MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
     dispatch(logoutAction());

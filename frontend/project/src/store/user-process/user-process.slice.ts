@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../const';
 import { UserState } from '../../types/state';
-import { checkAuthAction, loginAction, logoutAction, registerAction } from '../api-actions/auth-api-actions/auth-api-actions';
+import { loginAction, logoutAction, registerAction } from '../api-actions/auth-api-actions/auth-api-actions';
 
 export const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -15,20 +15,16 @@ export const userProcess = createSlice({
     setIsSubmitting: (state, action: PayloadAction<boolean>) => {
       state.isSubmitting = action.payload;
     },
+    setAuthorizationStatus: (state, action: PayloadAction<AuthorizationStatus>) => {
+      state.authorizationStatus = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuthAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
-      })
-      .addCase(checkAuthAction.rejected, (state, _action) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
-      })
       .addCase(loginAction.pending, (state, _action) => {
         state.isSubmitting = true;
       })
-      .addCase(loginAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
+      .addCase(loginAction.fulfilled, (state, _action) => {
         state.isSubmitting = false;
       })
       .addCase(loginAction.rejected, (state, _action) => {
@@ -38,7 +34,6 @@ export const userProcess = createSlice({
         state.isSubmitting = true;
       })
       .addCase(registerAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
         state.isSubmitting = false;
       })
       .addCase(registerAction.rejected, (state, _action) => {
@@ -51,5 +46,6 @@ export const userProcess = createSlice({
 });
 
 export const {
-  setIsSubmitting
+  setIsSubmitting,
+  setAuthorizationStatus
 } = userProcess.actions;

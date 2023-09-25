@@ -2,30 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Product } from '../../../types/product';
 import { AppDispatch, State } from '../../../types/state';
 import { AxiosInstance } from 'axios';
-import { APIRoute } from '../../../const';
-import { GuitarType } from '../../../types/guitar-type';
-import { StringCount } from '../../../types/string-count';
-
-export default class CreateProductDto {
-  public id!: string;
-
-  public title!: string;
-
-  public description!: string;
-
-  public createdAt!: Date;
-
-  public image!: string;
-
-  public type!: GuitarType;
-
-  public article!: string;
-
-  public numberOfStrings!: StringCount;
-
-  public price!: number;
-}
-
+import { APIRoute, AppRoute } from '../../../const';
+import { redirectToRoute } from '../../action';
+import { ProductData } from '../../../types/product-data';
+import { CustomError, errorHandle } from '../../../services/error-handler';
 
 export const fetchProductAction = createAsyncThunk<Product | null, string, {
   dispatch: AppDispatch;
@@ -33,12 +13,16 @@ export const fetchProductAction = createAsyncThunk<Product | null, string, {
   extra: AxiosInstance;
 }>(
   'data/fetchProduct',
-  async (productId: string, {dispatch, extra: api}) => {
-    const {data} = await api.put<Product>(`${APIRoute.Products}/${productId}`);
-    return data;
+  async (productId: string, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Product>(`${APIRoute.Products}/${productId}`);
+      return data;
+    } catch (error) {
+      errorHandle(error as CustomError);
+      return null;
+    }
   },
 );
-
 
 export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
   dispatch: AppDispatch;
@@ -46,20 +30,48 @@ export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchProducts',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Product[]>(APIRoute.Products);
-    return data;
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Product[]>(APIRoute.Products);
+      return data;
+    } catch (error) {
+      errorHandle(error as CustomError);
+      return [];
+    }
   },
 );
 
-export const postProductAction = createAsyncThunk<Product, CreateProductDto, {
+export const postProductAction = createAsyncThunk<Product | undefined, ProductData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/postProduct',
   async (productData, { dispatch, extra: api }) => {
-    const response = await api.post<Product>(`${APIRoute.Products}/${productData.id}`, productData);
-    return response.data;
+    try {
+      const response = await api.post<Product>(`${APIRoute.Products}/`, productData);
+      return response.data;
+    } catch (error) {
+      errorHandle(error as CustomError);
+      return undefined;
+    }
   }
 );
+
+export const removeProductAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch,
+    state: State,
+    extra: AxiosInstance
+  }
+>(
+  'data/removeProduct',
+  async (productId, {dispatch, extra: api}) => {
+      await api.delete<Product>(`${APIRoute.Products}/${productId}`);
+      await dispatch(fetchProductsAction());
+      dispatch(redirectToRoute(AppRoute.Main));
+  },
+);
+
