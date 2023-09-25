@@ -4,6 +4,7 @@ import { useGoToRegister } from "../../hooks/use-go-to-register/use-go-to-regist
 import useLoginForm from "../../hooks/use-login-form/use-login-form";
 import { getSubmittingStatus } from "../../store/user-process/user-process.selectors";
 
+
 function LoginScreen() : JSX.Element {
   const handleGoToRegisterClick = useGoToRegister();
   const { loginRef, passwordRef, handleSubmit } = useLoginForm();
@@ -29,7 +30,7 @@ function LoginScreen() : JSX.Element {
               </button></span>
             <p className="input-login__error">Заполните поле</p>
           </div>
-          <button className="button login__button button--medium" type="submit">Войти</button>
+          <button className="button login__button button--medium" type="submit" disabled={isSubmitting}>Войти</button>
         </form>
       </section>
     </Layout>

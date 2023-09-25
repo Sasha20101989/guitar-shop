@@ -3,6 +3,29 @@ import { Product } from '../../../types/product';
 import { AppDispatch, State } from '../../../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../../../const';
+import { GuitarType } from '../../../types/guitar-type';
+import { StringCount } from '../../../types/string-count';
+
+export default class CreateProductDto {
+  public id!: string;
+
+  public title!: string;
+
+  public description!: string;
+
+  public createdAt!: Date;
+
+  public image!: string;
+
+  public type!: GuitarType;
+
+  public article!: string;
+
+  public numberOfStrings!: StringCount;
+
+  public price!: number;
+}
+
 
 export const fetchProductAction = createAsyncThunk<Product | null, string, {
   dispatch: AppDispatch;
@@ -27,4 +50,16 @@ export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
     const {data} = await api.get<Product[]>(APIRoute.Products);
     return data;
   },
+);
+
+export const postProductAction = createAsyncThunk<Product, CreateProductDto, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/postProduct',
+  async (productData, { dispatch, extra: api }) => {
+    const response = await api.post<Product>(`${APIRoute.Products}/${productData.id}`, productData);
+    return response.data;
+  }
 );

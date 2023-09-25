@@ -36,5 +36,5 @@ Content-Type: application/json
 
 ## Проверить токен пользователя
 GET http://localhost:4000/users/login HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFkbWluQG1haWwubmV0IiwiaWQiOiI2NTEwOTRmMjgxOWE1MmFkMjRmODQ2MjQiLCJpYXQiOjE2OTU1OTIzMDMsImV4cCI6MTY5NTc2NTEwM30.gjjsbqz85GBzhegyHtbbPscW4gbHg3LbXNNYbahWNTs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNhc2hhMTNAbWFpbC5uZXQiLCJpZCI6IjY1MTEzNGMxNDJhZDUwOTc4ZTYyYWQzMyIsImlhdCI6MTY5NTYyODU4OSwiZXhwIjoxNjk1ODAxMzg5fQ.jj0o5XERVJwHhOl3XgVD3c2QhGHoDSCP6MXxX4VgLOU
 ###

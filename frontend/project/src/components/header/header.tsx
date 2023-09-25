@@ -1,36 +1,14 @@
+import { AuthorizationStatus } from "../../const";
 import { useGoToLogin } from "../../hooks/use-go-to-login/use-go-to-login";
-import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main.js";
+import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
+import { useIsLoggedIn } from "../../hooks/use-is-logged-in/use-is-logged-in";
 import HeaderNavigationList from "../header-navigation-list/header-navigation-list";
 
-type HeaderProps = {
-  isLoginScreen?: boolean;
-}
-
-function Header({isLoginScreen}: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
   const handleGoToLoginClick = useGoToLogin();
   const handleGoToMainClick = useGoToMain();
-  // const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
 
-  // const offers: Offer[] = useAppSelector(getOffers);
-  // const favoriteOffers: Offer[] = offers.filter((offer) => offer.isFavorite);
-  // const email = useAppSelector(getUserEmail);
-  // const avatarUrl = useAppSelector(getUserAvatarUrl);
-  // const isLoggedIn = useIsLoggedIn(AuthorizationStatus.Auth);
-
-  // const handleFavoritesClick: MouseEventHandler<HTMLAnchorElement> = (evt) => {
-  //   evt.preventDefault();
-  //   navigate(AppRoute.Favorites);
-  // };
-
-  // const handleLogout: MouseEventHandler<HTMLAnchorElement> = () => {
-  //   dispatch(logoutAction());
-  // };
-
-  // const handleLogin: MouseEventHandler<HTMLAnchorElement> = (evt) => {
-  //   evt.preventDefault();
-  //   navigate(AppRoute.Login);
-  // };
+  const isLoggedIn = useIsLoggedIn(AuthorizationStatus.Auth);
 
   return (
     <header className="header" id="header">
@@ -42,7 +20,7 @@ function Header({isLoginScreen}: HeaderProps): JSX.Element {
               <svg className="header__link-icon" width="12" height="14" aria-hidden="true">
                 <use xlinkHref="#icon-account"></use>
               </svg>
-              <span className="header__link-text">Вход</span>
+              {!isLoggedIn ? ( <span className="header__link-text">Вход</span>) : ( <span className="header__link-text">Выход</span>)}
             </a>
           </div>
         </div>
