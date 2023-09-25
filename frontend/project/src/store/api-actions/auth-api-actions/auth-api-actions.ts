@@ -19,14 +19,14 @@ class CreateUserDto {
   public password!: string;
 }
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<void, undefined,
+{
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
-}
->(
+}>(
 'user/checkAuth',
-async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     try{
       const response = await api.get<UserDto>(APIRoute.Login);
       dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
@@ -62,7 +62,8 @@ export const loginAction = createAsyncThunk<UserData | undefined, AuthData, {
   }
 );
 
-export const registerAction = createAsyncThunk<CreateUserDto | undefined, RegisterData, {
+export const registerAction = createAsyncThunk<CreateUserDto | undefined, RegisterData,
+{
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

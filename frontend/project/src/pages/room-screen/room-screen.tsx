@@ -2,12 +2,10 @@ import { useParams } from 'react-router-dom';
 
 import Layout from "../../components/layout/layout";
 import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
-import { Product } from '../../types/product';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getProduct, getProducts } from '../../store/main-data/main-data.selectors';
-import { fetchProductAction, fetchProductsAction } from '../../store/api-actions/products-api-actions/products-api-actions';
-import { loadProduct } from '../../store/main-data/main-data.slice.js';
+import { getProducts } from '../../store/main-data/main-data.selectors';
+import { fetchProductAction } from '../../store/api-actions/products-api-actions/products-api-actions';
 
 function RoomScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
@@ -87,7 +85,7 @@ function RoomScreen(): JSX.Element | null {
               )}
             </div>
           </div>
-          </div>
+        </div>
       </Layout>
     );
   }else{

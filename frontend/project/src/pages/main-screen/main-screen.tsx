@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Layout from "../../components/layout/layout";
 import ProductList from '../../components/product-list/product-list';
 import SortingOptions from '../../components/sorting-options/sorting-options';
@@ -7,15 +6,11 @@ import Pagination from '../../components/pagination/pagination';
 import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 import { useGoToAddNewProduct } from '../../hooks/use-go-to-add-new-product/use-go-to-add-new-product';
 import useFilteredAndSortedProducts from '../../hooks/use-filtered-and-sorted-offers/use-filtered-and-sorted-offers';
-import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
-import { AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks/index';
 import { isDataLoading } from '../../store/main-data/main-data.selectors';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import { fetchProductAction } from '../../store/api-actions/products-api-actions/products-api-actions';
 
 function MainScreen() : JSX.Element {
-  const dispatch = useAppDispatch();
   const handleGoToMainClick = useGoToMain();
   const handleGoToAddNewProductClick = useGoToAddNewProduct();
 
@@ -26,7 +21,7 @@ function MainScreen() : JSX.Element {
   const handlePageChange = (newPage: number) => {
     // код для обработки смены страницы, например, обновление данных на странице или запрос на сервер
     console.log(`Выбрана страница ${newPage}`);
-  }
+  };
 
   if(!isOffersLoading){
     return(

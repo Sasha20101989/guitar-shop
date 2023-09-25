@@ -45,14 +45,14 @@ export const mainData = createSlice({
         state.isDataLoading = false;
       })
       .addCase(fetchProductAction.rejected, (state, action) => {
-        state.selectedProduct= null;
+        state.selectedProduct = null;
         state.isDataLoading = false;
       })
       .addCase(fetchProductAction.pending, (state) => {
         state.isDataLoading = true;
       })
       .addCase(removeProductAction.fulfilled, (state, action) => {
-        state.selectedProduct= null;
+        state.selectedProduct = null;
         state.isDataLoading = false;
       })
       .addCase(removeProductAction.rejected, (state, action) => {
@@ -60,7 +60,7 @@ export const mainData = createSlice({
       })
       .addCase(removeProductAction.pending, (state) => {
         state.isDataLoading = true;
-      })
+      });
   },
 });
 

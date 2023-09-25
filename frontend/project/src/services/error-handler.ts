@@ -40,7 +40,3 @@ export const errorHandle = (error: CustomError): void => {
     toast.error('An error occurred');
   }
 };
-
-
-
-

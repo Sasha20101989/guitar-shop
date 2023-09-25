@@ -5,4 +5,4 @@ export const formatDateToDDMMYYYY = (dateString: string) => {
     month: '2-digit',
     year: 'numeric',
   });
-}
+};

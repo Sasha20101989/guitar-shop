@@ -1,4 +1,4 @@
-import { NameSpace, SortingOption } from '../../const';
+import { NameSpace } from '../../const';
 import { GuitarType } from '../../types/guitar-type';
 import { State } from '../../types/state';
 import { StringCount } from '../../types/string-count';

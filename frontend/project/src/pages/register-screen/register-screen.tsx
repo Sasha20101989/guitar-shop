@@ -1,7 +1,7 @@
-import Layout from "../../components/layout/layout";
-import { useAppSelector } from "../../hooks/index";
-import useRegisterForm from "../../hooks/use-register-form/use-register-form";
-import { getSubmittingStatus } from "../../store/user-process/user-process.selectors";
+import Layout from '../../components/layout/layout';
+import { useAppSelector } from '../../hooks/index';
+import useRegisterForm from '../../hooks/use-register-form/use-register-form';
+import { getSubmittingStatus } from '../../store/user-process/user-process.selectors';
 
 function RegisterScreen() : JSX.Element {
   const isSubmitting = useAppSelector(getSubmittingStatus);

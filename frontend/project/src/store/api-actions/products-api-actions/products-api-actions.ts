@@ -58,20 +58,12 @@ export const postProductAction = createAsyncThunk<Product | undefined, ProductDa
   }
 );
 
-export const removeProductAction = createAsyncThunk<
-  void,
-  string,
-  {
-    dispatch: AppDispatch,
-    state: State,
-    extra: AxiosInstance
-  }
->(
+export const removeProductAction = createAsyncThunk<void, string, {dispatch: AppDispatch, state: State, extra: AxiosInstance}>
+(
   'data/removeProduct',
   async (productId, {dispatch, extra: api}) => {
-      await api.delete<Product>(`${APIRoute.Products}/${productId}`);
-      await dispatch(fetchProductsAction());
-      dispatch(redirectToRoute(AppRoute.Main));
-  },
+    await api.delete<Product>(`${APIRoute.Products}/${productId}`);
+    await dispatch(fetchProductsAction());
+    dispatch(redirectToRoute(AppRoute.Main));
+  }
 );
-
