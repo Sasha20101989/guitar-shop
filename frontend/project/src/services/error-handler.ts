@@ -8,7 +8,6 @@ export interface CustomError {
       message?: string;
     };
   };
-  request?: any;
   message?: string;
 }
 
@@ -34,8 +33,6 @@ export const errorHandle = (error: CustomError): void => {
     } else {
       toast.error('Server Error');
     }
-  } else if (error.request) {
-    toast.error('Network Error');
   } else {
     toast.error('An error occurred');
   }

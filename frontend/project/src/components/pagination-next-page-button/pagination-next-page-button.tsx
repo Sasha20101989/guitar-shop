@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type PaginationNextPageButtonProps = {
   currentPage: number;
   totalPages: number;
@@ -17,13 +19,13 @@ function PaginationNextPageButton({ currentPage, totalPages, onPageChange }: Pag
 
   return (
     <li className={nextPageClassName} id="next">
-      <a
+      <Link
+        to={`#${currentPage + 1}`}
         className="link pagination__page-link"
-        href={`#${currentPage + 1}`}
         onClick={handleNextPageClick}
       >
         Далее
-      </a>
+      </Link>
     </li>
   );
 }

@@ -1,6 +1,6 @@
-import { GuitarType } from "./types/guitar-type";
-import { Product } from "./types/product.js";
-import { StringCount } from "./types/string-count";
+import { GuitarType } from './types/guitar-type';
+import { Product } from './types/product.js';
+import { StringCount } from './types/string-count';
 
 
 export enum AppRoute {
@@ -9,9 +9,9 @@ export enum AppRoute {
   Register = '/register',
   ProductForm = '/product/:id',
   NotFound = '*',
-  EditProduct = "/products/edit/:id",
-  AddProduct = "/product/add",
-  Logout = "/logout"
+  EditProduct = '/products/edit/:id',
+  AddProduct = '/product/create',
+  Logout = '/logout'
 }
 
 
@@ -77,29 +77,14 @@ export const filterProducts = (
   products: Product[],
   stringFilters: Record<StringCount, boolean>,
   typeFilters: Record<GuitarType, boolean>
-): Product[] => {
-  return products.filter((product) => {
-    const stringCountFilter = Object.entries(stringFilters).some(([stringCount, isSelected]) => {
-      if (isSelected && product.numberOfStrings === stringCount) {
-        return true;
-      }
-      return false;
-    });
-
-    const typeFilter = Object.entries(typeFilters).some(([type, isSelected]) => {
-      if (isSelected && product.type === type) {
-        return true;
-      }
-      return false;
-    });
-
-    if (stringCountFilter || typeFilter) {
-      return true;
-    }
-
-    return false;
-  });
-};
+): Product[] => products.filter((product) => (
+  Object.entries(stringFilters).some(([stringCount, isSelected]) => (
+    isSelected && product.numberOfStrings === stringCount
+  )) ||
+  Object.entries(typeFilters).some(([type, isSelected]) => (
+    isSelected && product.type === type
+  ))
+));
 
 export const RING_LOADER_COLOR = '#123abc';
 
@@ -113,4 +98,3 @@ export const isAuthorization = (status: AuthorizationStatus) =>
 
 export const isAuthorizationUnknown = (status: AuthorizationStatus) =>
   status === AuthorizationStatus.Unknown;
-

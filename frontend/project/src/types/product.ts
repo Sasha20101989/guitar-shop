@@ -5,7 +5,7 @@ export type Product = {
   id: string;
   title: string;
   description: string;
-  createdAt: Date;
+  createdAt: string;
   image: string;
   type: GuitarType;
   article: string;

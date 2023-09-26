@@ -1,8 +1,8 @@
-import { useCallback, useEffect } from "react";
-import { SortingOrder } from "../../const";
-import { useAppDispatch, useAppSelector } from "../../hooks/index";
-import { getSortingOrderMethod } from "../../store/main-process/main-process.selectors";
-import { changeSortingOrder } from "../../store/main-process/main-process.slice";
+import { useCallback } from 'react';
+import { SortingOrder } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { getSortingOrderMethod } from '../../store/main-process/main-process.selectors';
+import { changeSortingOrder } from '../../store/main-process/main-process.slice';
 
 function SortOrderButtons(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -21,14 +21,16 @@ function SortOrderButtons(): JSX.Element {
         }`}
         aria-label="По возрастанию"
         onClick={() => onOptionSelect(SortingOrder.Asc)}
-      ></button>
+      >
+      </button>
       <button
         className={`catalog-sort__order-button catalog-sort__order-button--down ${
           selectedOption === SortingOrder.Desc ? 'catalog-sort__order-button--active' : ''
         }`}
         aria-label="По убыванию"
         onClick={() => onOptionSelect(SortingOrder.Desc)}
-      ></button>
+      >
+      </button>
     </div>
   );
 }

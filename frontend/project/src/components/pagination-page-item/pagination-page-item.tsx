@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type PaginationPageItemProps = {
   page: number;
   currentPage: number;
@@ -16,13 +18,13 @@ function PaginationPageItem({ page, currentPage, onPageChange }: PaginationPageI
 
   return (
     <li className={pageClassName}>
-      <a
+      <Link
+        to={`#${page}`}
         className="link pagination__page-link"
-        href={`#${page}`}
         onClick={handlePageClick}
       >
         {page}
-      </a>
+      </Link>
     </li>
   );
 }

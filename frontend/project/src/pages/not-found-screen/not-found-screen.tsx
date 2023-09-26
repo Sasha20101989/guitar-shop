@@ -1,5 +1,5 @@
-import Layout from "../../components/layout/layout";
-import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
+import Layout from '../../components/layout/layout';
+import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 
 function NotFoundScreen() : JSX.Element {
   const handleGoToMainClick = useGoToMain();

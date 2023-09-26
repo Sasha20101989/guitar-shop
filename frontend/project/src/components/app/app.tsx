@@ -22,7 +22,7 @@ function App(): JSX.Element {
         path={AppRoute.EditProduct}
         element={
           <PrivateRoute authorizationStatus={authorizationStatus}>
-            <ProductEditorScreen editMode={true}/>
+            <ProductEditorScreen editMode/>
           </PrivateRoute>
         }
       />

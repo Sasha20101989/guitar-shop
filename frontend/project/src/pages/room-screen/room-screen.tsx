@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-import Layout from "../../components/layout/layout";
-import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
+import Layout from '../../components/layout/layout';
+import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { getProducts } from '../../store/main-data/main-data.selectors';
@@ -39,11 +39,11 @@ function RoomScreen(): JSX.Element | null {
       <Layout>
         <h1 className="page-content__title title title--bigger">Товар</h1>
         <ul className="breadcrumbs page-content__breadcrumbs">
-          <li className="breadcrumbs__item"><a className="link" onClick={handleGoToMainClick}>Главная</a>
+          <li className="breadcrumbs__item"><Link to="" className="link">Главная</Link>
           </li>
-          <li className="breadcrumbs__item"><a className="link" onClick={handleGoToMainClick}>Каталог</a>
+          <li className="breadcrumbs__item"><Link to="" className="link" onClick={handleGoToMainClick}>Каталог</Link>
           </li>
-          <li className="breadcrumbs__item"><a className="link">Товар</a>
+          <li className="breadcrumbs__item"><Link to="" className="link">Товар</Link>
           </li>
         </ul>
         <div className="product-container">
@@ -53,12 +53,12 @@ function RoomScreen(): JSX.Element | null {
             <br/>
             <br/>
             <div className="tabs">
-              <a className={`button button--medium tabs__button ${activeTab === 'characteristics' ? 'active' : ''}`} href="#characteristics" onClick={switchToCharacteristics}>
+              <Link className={`button button--medium tabs__button ${activeTab === 'characteristics' ? 'active' : ''}`} to="#characteristics" onClick={switchToCharacteristics}>
                 Характеристики
-              </a>
-              <a className={`button button--black-border button--medium tabs__button ${activeTab === 'description' ? 'active' : ''}`} href="#description" onClick={switchToDescription}>
+              </Link>
+              <Link className={`button button--black-border button--medium tabs__button ${activeTab === 'description' ? 'active' : ''}`} to="#description" onClick={switchToDescription}>
                 Описание
-              </a>
+              </Link>
               {activeTab === 'characteristics' && (
                 <div className="tabs__content" id="characteristics">
                   <table className="tabs__table">

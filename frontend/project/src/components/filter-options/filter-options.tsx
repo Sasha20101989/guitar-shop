@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { Product } from "../../types/product";
-import { GuitarType } from "../../types/guitar-type";
-import { useAppDispatch, useAppSelector } from "../../hooks/index";
-import { getStringFilters, getTypeFilters } from "../../store/main-process/main-process.selectors";
-import { resetStringFilters, resetTypeFilters, toggleStringFilter, toggleTypeFilter } from "../../store/main-process/main-process.slice";
-import { StringCount } from "../../types/string-count";
+import { GuitarType } from '../../types/guitar-type';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { getStringFilters, getTypeFilters } from '../../store/main-process/main-process.selectors';
+import { resetStringFilters, resetTypeFilters, toggleStringFilter, toggleTypeFilter } from '../../store/main-process/main-process.slice';
+import { StringCount } from '../../types/string-count';
 
 const guitarTypeLabels: Record<GuitarType, string> = {
   [GuitarType.Electric]: 'Электрогитары',

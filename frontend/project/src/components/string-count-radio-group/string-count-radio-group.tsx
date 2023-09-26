@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { StringCount } from "../../types/string-count";
+import { Fragment } from 'react';
+import { StringCount } from '../../types/string-count';
 
 type StringCountRadioGroupProps = {
   selectedCount: string;

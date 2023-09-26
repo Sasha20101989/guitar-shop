@@ -1,6 +1,6 @@
-import SocialLink from "../social-link/social-link";
+import SocialLink from '../social-link/social-link';
 
-function SocialLinkList(): JSX.Element  {
+function SocialLinkList(): JSX.Element {
   return (
     <ul className="socials__list">
       <SocialLink href="https://www.skype.com/" label="Мы в skype" icon="#icon-skype"/>

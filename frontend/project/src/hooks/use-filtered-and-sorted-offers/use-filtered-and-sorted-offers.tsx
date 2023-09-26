@@ -1,14 +1,9 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../index';
-import { Product } from '../../types/product';
 import { fetchProductsAction } from '../../store/api-actions/products-api-actions/products-api-actions';
 import { SortingOption, SortingOrder, sortProducts } from '../../const';
 import { getSortingMethod, getSortingOrderMethod, getStringFilters, getTypeFilters } from '../../store/main-process/main-process.selectors';
 import { getProducts } from '../../store/main-data/main-data.selectors';
-
-type UseFilteredAndSortedProductsProps = {
-  filteredProducts: Product[];
-}
 
 function useFilteredAndSortedProducts() {
   const dispatch = useAppDispatch();
@@ -23,12 +18,8 @@ function useFilteredAndSortedProducts() {
     dispatch(fetchProductsAction());
   }, [dispatch]);
 
-  const areFiltersSelected = () => {
-    return (
-      Object.values(stringFilters).some((isSelected) => isSelected) ||
-      Object.values(typeFilters).some((isSelected) => isSelected)
-    );
-  };
+  const areFiltersSelected = () => Object.values(stringFilters).some((isSelected) => isSelected) ||
+      Object.values(typeFilters).some((isSelected) => isSelected);
 
   if (!areFiltersSelected()) {
     return sortProducts(allProducts, sortBy, sortOrder);

@@ -1,5 +1,5 @@
-import PaginationNextPageButton from "../pagination-next-page-button/pagination-next-page-button";
-import PaginationPageItem from "../pagination-page-item/pagination-page-item";
+import PaginationNextPageButton from '../pagination-next-page-button/pagination-next-page-button';
+import PaginationPageItem from '../pagination-page-item/pagination-page-item';
 
 type PaginationProps = {
   currentPage: number;

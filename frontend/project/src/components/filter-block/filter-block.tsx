@@ -1,5 +1,5 @@
 type FilterBlockProps = {
-  title: String;
+  title: string;
   children: React.ReactNode;
 }
 

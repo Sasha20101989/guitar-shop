@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { GuitarType } from "../../types/guitar-type";
+import { Fragment } from 'react';
+import { GuitarType } from '../../types/guitar-type';
 
 type RadioButtonGroupProps = {
   selectedType: string;

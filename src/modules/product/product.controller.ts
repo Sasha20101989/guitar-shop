@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
 import * as core from 'express-serve-static-core';
-import { ParamsDictionary } from 'express-serve-static-core';
 import { AppComponent } from '../../types/app-component.enum.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { ProductServiceInterface } from './product-service.interface.js';
@@ -21,10 +20,6 @@ import { ValidateDtoMiddleware } from '../../core/middlewares/validate-dto.middl
 import { UploadFileMiddleware } from '../../core/middlewares/upload-file.middleware.js';
 import { Controller } from '../../core/controller/controller.abstract.js';
 import UploadImageResponse from './response/upload-image.response.js';
-
-type ParamsProductDetails = {
-  productId: string;
-} | ParamsDictionary
 
 @injectable()
 export default class ProductController extends Controller {
@@ -93,7 +88,7 @@ export default class ProductController extends Controller {
     });
   }
 
-  public async uploadImage(req: Request<ParamsProductDetails>, res: Response) {
+  public async uploadImage(req: Request, res: Response) {
     const {productId} = req.params;
     const updateDto = { image: req.file?.filename };
     await this.productService.update(productId, updateDto);
@@ -120,7 +115,6 @@ export default class ProductController extends Controller {
 
     this.ok(res, fillDTO(ProductRdo, deletedProduct));
   }
-
 
   public async update(
     {params, body}: Request<core.ParamsDictionary | ParamsGetProduct, UnknownRecord, UpdateProductDto>,

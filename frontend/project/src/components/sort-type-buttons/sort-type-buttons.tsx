@@ -1,8 +1,8 @@
-import { useCallback, useEffect } from "react";
-import { SortingOption } from "../../const";
-import { useAppDispatch, useAppSelector } from "../../hooks/index";
-import { getSortingMethod } from "../../store/main-process/main-process.selectors";
-import { changeSorting } from "../../store/main-process/main-process.slice";
+import { useCallback } from 'react';
+import { SortingOption } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { getSortingMethod } from '../../store/main-process/main-process.selectors';
+import { changeSorting } from '../../store/main-process/main-process.slice';
 
 function SortTypeButtons(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
-import { GuitarType } from "./guitar.type.js";
-import { StringCount } from "./string-count.type.js";
+import { GuitarType } from './guitar.type.js';
+import { StringCount } from './string-count.type.js';
 
 export type Product = {
   title: string;

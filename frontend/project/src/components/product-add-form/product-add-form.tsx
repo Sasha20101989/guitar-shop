@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/index";
-import { useGoToMain } from "../../hooks/use-go-to-main/use-go-to-main";
-import { ChangeEvent, FormEvent, Fragment, useRef, useState } from "react";
-import { postProductAction } from "../../store/api-actions/products-api-actions/products-api-actions";
-import { ProductData } from "../../types/product-data";
-import { GuitarType } from "../../types/guitar-type";
-import { StringCount } from "../../types/string-count";
-import { formatDateToDDMMYYYY } from "../../utils/util-date";
-import { AppRoute } from "../../const";
-import { toast } from "react-toastify";
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/index';
+import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
+import { FormEvent, Fragment, useRef, useState } from 'react';
+import { postProductAction } from '../../store/api-actions/products-api-actions/products-api-actions';
+import { ProductData } from '../../types/product-data';
+import { GuitarType } from '../../types/guitar-type';
+import { StringCount } from '../../types/string-count';
+import { formatDateToDDMMYYYY } from '../../utils/util-date';
+import { AppRoute } from '../../const';
+import { toast } from 'react-toastify';
 
 function ProductAddForm(): JSX.Element {
   const handleGoToMainClick = useGoToMain();
@@ -41,7 +41,7 @@ function ProductAddForm(): JSX.Element {
   };
 
   const showNotSuccessNotification = (errors: { [key: string]: string }) => {
-    const errorMessages = Object.values(errors).join("\n");
+    const errorMessages = Object.values(errors).join('\n');
     toast.warn(errorMessages, {
       position: toast.POSITION.TOP_RIGHT,
       autoClose: 10000,
@@ -125,12 +125,12 @@ function ProductAddForm(): JSX.Element {
 
   const handleImageInputClick = () => {
     if (imageInputRef.current) {
-      imageInputRef.current.click(); // Вызывает клик на скрытом поле
+      imageInputRef.current.click();
     }
   };
 
   const handleRemoveImage = () => {
-      setImage('');
+    setImage('');
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,29 +155,28 @@ function ProductAddForm(): JSX.Element {
         <h1 className="add-item__title">Новый товар</h1>
         <ul className="breadcrumbs">
           <li className="breadcrumbs__item">
-            <a className="link" onClick={handleGoToMainClick}>
+            <Link to="" className="link" onClick={handleGoToMainClick}>
               Вход
-            </a>
+            </Link>
           </li>
           <li className="breadcrumbs__item">
-            <a className="link" onClick={handleGoToMainClick}>Товары</a>
+            <Link to="" className="link" onClick={handleGoToMainClick}>Товары</Link>
           </li>
           <li className="breadcrumbs__item">
-            <a className="link">Новый товар</a>
+            <Link to="" className="link">Новый товар</Link>
           </li>
         </ul>
         <form className="add-item__form" onSubmit={handleSubmit}>
           <div className="add-item__form-left">
             <div className="edit-item-image add-item__form-image">
               <div className="edit-item-image__image-wrap">
-              <img
+                <img
                   className="edit-item-image__image"
-                  src={selectedImage || '/default-image.png'}
+                  src={selectedImage || ''}
                   width="133"
                   height="332"
-                  alt="Product Image"
-
-                  />
+                  alt={selectedImage !== null ? selectedImage : undefined}
+                />
               </div>
               <input
                 type="file"
@@ -243,7 +242,7 @@ function ProductAddForm(): JSX.Element {
             </div>
             <div className="custom-input add-item__form-input add-item__form-input--price is-placeholder">
               <label><span>Введите цену товара</span>
-                <input type="text" name="price" ref={priceRef} placeholder="Цена в формате 00 000"/>
+                <input type="number" name="price" ref={priceRef} placeholder="Цена в формате 00 000"/>
               </label>
               <p>Заполните поле</p>
             </div>

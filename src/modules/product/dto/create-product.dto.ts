@@ -18,10 +18,6 @@ export default class CreateProductDto {
   @IsDateString({}, {message: 'Date must be valid ISO date'})
   public createdAt!: Date;
 
-  // @IsNotEmpty({ message: 'Image are required' })
-  // @Matches(/\.(jpg|png)$/, { message: 'Image must be in JPG or PNG format' })
-  // public image!: string;
-
   @IsNotEmpty({ message: 'Guitar type are required' })
   @IsEnum(GuitarType, { message: 'Invalid guitar type' })
   public type!: GuitarType;

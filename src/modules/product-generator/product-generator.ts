@@ -19,7 +19,7 @@ export default class ProductGenerator implements ProductGeneratorInterface {
     const type = Object.values(GuitarType)[getRandomInt(0, Object.values(GuitarType).length - 1)];
     const articleNumbers = getRandomInt(1000, 9999);
     const article = ARTICLE_PREFIX[getRandomInt(0, ARTICLE_PREFIX.length - 1)] + articleNumbers.toString();
-    const nunmberOfStrings  = Object.values(StringCount)[getRandomInt(0, Object.values(StringCount).length - 1)];
+    const nunmberOfStrings = Object.values(StringCount)[getRandomInt(0, Object.values(StringCount).length - 1)];
     const price = getRandomInt(100, 1000000);
 
     return [

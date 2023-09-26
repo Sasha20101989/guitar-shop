@@ -22,13 +22,15 @@ function RegisterScreen() : JSX.Element {
             <p className="input-login__error">Заполните поле</p>
           </div>
           <div className="input-login">
-            <label htmlFor="password">Придумайте пароль</label><span>
+            <label htmlFor="password">Придумайте пароль</label>
+            <span>
               <input type="password" ref={passwordRef} placeholder="• • • • • • • • • • • •" id="password" name="password" autoComplete="off" required/>
               <button className="input-login__button-eye" type="button">
                 <svg width="14" height="8" aria-hidden="true">
                   <use xlinkHref="#icon-eye"></use>
                 </svg>
-              </button></span>
+              </button>
+            </span>
             <p className="input-login__error">Заполните поле</p>
           </div>
           <button className="button login__button button--medium" type="submit" disabled={isSubmitting}>Зарегистрироваться</button>

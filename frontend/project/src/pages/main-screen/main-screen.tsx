@@ -1,4 +1,4 @@
-import Layout from "../../components/layout/layout";
+import Layout from '../../components/layout/layout';
 import ProductList from '../../components/product-list/product-list';
 import SortingOptions from '../../components/sorting-options/sorting-options';
 import FilterOptions from '../../components/filter-options/filter-options';
@@ -9,6 +9,7 @@ import useFilteredAndSortedProducts from '../../hooks/use-filtered-and-sorted-of
 import { useAppSelector } from '../../hooks/index';
 import { isDataLoading } from '../../store/main-data/main-data.selectors';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { Link } from 'react-router-dom';
 
 function MainScreen() : JSX.Element {
   const handleGoToMainClick = useGoToMain();
@@ -18,9 +19,8 @@ function MainScreen() : JSX.Element {
 
   const sortedAndFilteredProducts = useFilteredAndSortedProducts();
 
-  const handlePageChange = (newPage: number) => {
-    // код для обработки смены страницы, например, обновление данных на странице или запрос на сервер
-    console.log(`Выбрана страница ${newPage}`);
+  const handlePageChange = (_newPage: number) => {
+  //TODO: в последнюю очередь
   };
 
   if(!isOffersLoading){
@@ -30,10 +30,8 @@ function MainScreen() : JSX.Element {
           <div className="container">
             <h1 className="product-list__title">Список товаров</h1>
             <ul className="breadcrumbs">
-              <li className="breadcrumbs__item"><a className="link" onClick={handleGoToMainClick}>Вход</a>
-              </li>
-              <li className="breadcrumbs__item"><a className="link">Товары</a>
-              </li>
+              <li className="breadcrumbs__item"><Link to="" className="link" onClick={handleGoToMainClick}>Вход</Link></li>
+              <li className="breadcrumbs__item"><Link to="" className="link">Товары</Link></li>
             </ul>
             <div className="catalog">
               <FilterOptions/>
