@@ -7,3 +7,5 @@ export const getSortingMethod = (state: State): string => state[NameSpace.Main].
 export const getSortingOrderMethod = (state: State): string => state[NameSpace.Main].sortingOrderMethod;
 export const getStringFilters = (state: State): Record<StringCount, boolean> => state[NameSpace.Main].stringFilters;
 export const getTypeFilters = (state: State): Record<GuitarType, boolean> => state[NameSpace.Main].typeFilters;
+export const getTrueTypeFilters = (typeFilters: Record<GuitarType, boolean>): GuitarType[] =>
+  (Object.keys(typeFilters) as GuitarType[]).filter((key) => typeFilters[key] === true);

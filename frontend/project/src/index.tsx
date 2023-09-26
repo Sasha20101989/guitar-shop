@@ -11,7 +11,7 @@ import { checkAuthAction } from './store/api-actions/auth-api-actions/auth-api-a
 import { fetchProductsAction } from './store/api-actions/products-api-actions/products-api-actions';
 
 store.dispatch(checkAuthAction());
-store.dispatch(fetchProductsAction());
+store.dispatch(fetchProductsAction({}));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

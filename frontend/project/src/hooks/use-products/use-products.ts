@@ -9,7 +9,7 @@ function useProducts(): Product[] {
   const products = useAppSelector(getProducts);
 
   useEffect(() => {
-    dispatch(fetchProductsAction());
+    dispatch(fetchProductsAction({}));
   }, [dispatch]);
 
   return products;

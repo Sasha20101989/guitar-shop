@@ -3,15 +3,15 @@ import { Link, useParams } from 'react-router-dom';
 import Layout from '../../components/layout/layout';
 import { useGoToMain } from '../../hooks/use-go-to-main/use-go-to-main';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getProducts } from '../../store/main-data/main-data.selectors';
+import { useAppDispatch } from '../../hooks/index';
 import { fetchProductAction } from '../../store/api-actions/products-api-actions/products-api-actions';
+import useProducts from '../../hooks/use-products/use-products';
 
 function RoomScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
 
-  const products = useAppSelector(getProducts);
+  const products = useProducts();
 
   useEffect(() => {
     if(id){

@@ -34,17 +34,23 @@ export default class ProductService implements ProductServiceInterface {
       .exec();
   }
 
-  private async findProducts(query: object, limit?: number): Promise<DocumentType<ProductEntity>[]> {
+  private async findProducts(query: object, types?: string[], limit?: number): Promise<DocumentType<ProductEntity>[]> {
     const productLimit = limit || COUNT_CONSTANTS.DEFAULT_PRODUCTS_COUNT;
+    let queryWithProductType = query;
+
+    if (types && types.length > 0) {
+      queryWithProductType = { ...query, type: { $in: types } };
+    }
+
     return this.productModel
-      .find(query)
+      .find(queryWithProductType)
       .sort({ createdAt: SortType.Up })
       .limit(productLimit)
       .exec();
   }
 
-  public async find(limit?: number): Promise<DocumentType<ProductEntity>[]> {
-    return this.findProducts({}, limit);
+  public async find(types?: string[], limit?: number): Promise<DocumentType<ProductEntity>[]> {
+    return this.findProducts({}, types, limit);
   }
 
   public async create(dto: CreateProductDto): Promise<DocumentType<ProductEntity>> {

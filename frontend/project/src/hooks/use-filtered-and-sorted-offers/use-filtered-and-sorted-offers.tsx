@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../index';
 import { fetchProductsAction } from '../../store/api-actions/products-api-actions/products-api-actions';
 import { SortingOption, SortingOrder, sortProducts } from '../../const';
 import { getSortingMethod, getSortingOrderMethod, getStringFilters, getTypeFilters } from '../../store/main-process/main-process.selectors';
-import { getProducts } from '../../store/main-data/main-data.selectors';
+import useProducts from '../use-products/use-products';
 
 function useFilteredAndSortedProducts() {
   const dispatch = useAppDispatch();
@@ -12,10 +12,10 @@ function useFilteredAndSortedProducts() {
   const stringFilters = useAppSelector(getStringFilters);
   const typeFilters = useAppSelector(getTypeFilters);
 
-  const allProducts = useAppSelector(getProducts);
+  const allProducts = useProducts();
 
   useEffect(() => {
-    dispatch(fetchProductsAction());
+    dispatch(fetchProductsAction({}));
   }, [dispatch]);
 
   const areFiltersSelected = () => Object.values(stringFilters).some((isSelected) => isSelected) ||

@@ -27,15 +27,20 @@ export const fetchProductAction = createAsyncThunk<Product | null, string, {
   },
 );
 
-export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
+export interface FetchProductsParams {
+  limit?: number;
+  types?: string[];
+}
+
+export const fetchProductsAction = createAsyncThunk<Product[], FetchProductsParams, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchProducts',
-  async (_arg, { dispatch, extra: api }) => {
+  async (params, { dispatch, extra: api }) => {
     try {
-      const { data } = await api.get<Product[]>(APIRoute.Products);
+      const { data } = await api.get<Product[]>(APIRoute.Products, { params });
       return data;
     } catch (error) {
       errorHandle(error as CustomError);
@@ -69,7 +74,6 @@ export const removeProductAction = createAsyncThunk<void, string, {
   'data/removeProduct',
   async (productId, {dispatch, extra: api}) => {
     await api.delete<Product>(`${APIRoute.Products}/${productId}`);
-    await dispatch(fetchProductsAction());
     dispatch(redirectToRoute(AppRoute.Main));
   }
 );
@@ -95,7 +99,6 @@ export const editProductAction = createAsyncThunk<
         });
       }
 
-      await dispatch(fetchProductsAction());
       dispatch(redirectToRoute(`${AppRoute.EditProduct}/${productData.id}`));
     } catch (error) {
       errorHandle(error as CustomError);

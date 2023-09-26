@@ -9,7 +9,7 @@ export interface ProductServiceInterface extends DocumentExistsInterface{
   create(dto: CreateProductDto): Promise<DocumentType<ProductEntity>>;
   update(productId: MongoId, dto: UpdateProductDto): Promise<DocumentType<ProductEntity> | null>;
   delete(productId: MongoId): Promise<DocumentType<ProductEntity> | null>;
-  find(limit?: number): Promise<DocumentType<ProductEntity>[]>;
+  find(types?: string[], limit?: number): Promise<DocumentType<ProductEntity>[]>;
   getProductDetails(productId: MongoId): Promise<DocumentType<ProductEntity> | null>;
   exists(documentId: string): Promise<boolean>;
 }

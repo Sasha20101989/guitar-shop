@@ -99,11 +99,18 @@ export default class ProductController extends Controller {
     { query }: Request<core.ParamsDictionary | ParamsGetProduct>,
     res: Response
   ): Promise<void> {
-    const { limit } = query;
+    const { limit, types } = query;
+    let typeArray: string[] = [];
 
-    const products = await this.productService.find(Number(limit));
+    if (typeof types === 'string') {
+      typeArray = types.split(',');
+    } else if (Array.isArray(types)) {
+      typeArray = types.map((t) => String(t));
+    }
 
-    this.ok(res, fillDTO(ProductRdo, products || []));
+  const products = await this.productService.find(typeArray, Number(limit));
+
+  this.ok(res, fillDTO(ProductRdo, products || []));
   }
 
   public async deleteProduct(
